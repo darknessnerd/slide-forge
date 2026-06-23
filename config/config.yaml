@@ -1,0 +1,3 @@
+transport: ${env:MCP_TRANSPORT=stdio}
+addr:      ${env:ADDR=:8080}
+log_level: ${env:LOG_LEVEL=info}
