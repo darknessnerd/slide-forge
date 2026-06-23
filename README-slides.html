@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentation</title>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+        crossorigin="anonymous">
+
+
+  <style>
+:root {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --text: #1a1a2e;
+  --subtext: #4a4a6a;
+  --accent: #0052cc;
+  --accent-hover: #0041a3;
+  --border: #c1c7d0;
+  --code-bg: #eaecf0;
+  --nav-bg: rgba(240,242,245,0.97);
+  --progress-bg: #c1c7d0;
+  --progress-fill: #0052cc;
+  --notes-bg: #e8f0fe;
+  --notes-border: #0052cc;
+  --slide-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}</style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow: hidden;
+    }
+
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #slides-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 6rem;
+      background: var(--surface);
+      box-shadow: var(--slide-shadow);
+      will-change: opacity, transform;
+    }
+
+
+
+    .t-enter        { transition: opacity 280ms ease; }
+    .t-enter-start  { opacity: 0; }
+    .t-enter-end    { opacity: 1; }
+    .t-leave        { transition: opacity 200ms ease; }
+    .t-leave-start  { opacity: 1; }
+    .t-leave-end    { opacity: 0; }
+
+    .ts-enter        { transition: transform 300ms cubic-bezier(.4,0,.2,1), opacity 300ms ease; }
+    .ts-enter-start  { transform: translateX(60px); opacity: 0; }
+    .ts-enter-end    { transform: translateX(0);    opacity: 1; }
+    .ts-leave        { transition: transform 220ms ease, opacity 220ms ease; }
+    .ts-leave-start  { transform: translateX(0);    opacity: 1; }
+    .ts-leave-end    { transform: translateX(-60px);opacity: 0; }
+
+
+    .slide[data-type="title"] {
+      text-align: center;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+    }
+
+    .slide[data-type="title"] .slide-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+
+    .slide[data-type="section"] {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .slide[data-type="section"] .slide-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 600;
+      color: #fff;
+    }
+
+
+    .slide[data-type="summary"] .slide-title {
+      color: var(--accent);
+    }
+
+
+    .slide-title {
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+      align-self: flex-start;
+      width: 100%;
+    }
+
+    .slide-content {
+      width: 100%;
+      max-width: 900px;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+    }
+
+    .slide-content p   { margin-bottom: 0.75rem; }
+    .slide-content ul,
+    .slide-content ol  { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    .slide-content li  { margin-bottom: 0.35rem; }
+
+    .slide-content code {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      font-size: 0.9em;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    .slide-content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+      margin-bottom: 0.75rem;
+    }
+
+    .slide-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.9em;
+    }
+
+    .slide-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.75rem;
+      font-size: 0.95em;
+    }
+
+    .slide-content th,
+    .slide-content td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+    }
+
+    .slide-content th {
+      background: var(--code-bg);
+      font-weight: 600;
+    }
+
+    .slide-content blockquote {
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+      color: var(--subtext);
+      margin-bottom: 0.75rem;
+    }
+
+
+    #progress-bar-wrap {
+      height: 4px;
+      background: var(--progress-bg);
+    }
+
+    #progress-bar {
+      height: 100%;
+      background: var(--progress-fill);
+      transition: width 280ms ease;
+    }
+
+
+    #nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--nav-bg);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    #nav button {
+      min-width: 80px;
+      padding: 0.4rem 1.1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 150ms, color 150ms, border-color 150ms;
+    }
+
+    #nav button:not(:disabled):hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    #nav button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    #slide-counter {
+      font-size: 0.85rem;
+      color: var(--subtext);
+      min-width: 70px;
+      text-align: center;
+    }
+
+    #fullscreen-btn {
+      margin-left: auto;
+    }
+
+
+    #notes-panel {
+      padding: 0.75rem 2rem;
+      background: var(--notes-bg);
+      border-top: 3px solid var(--notes-border);
+      font-size: 0.85rem;
+      color: var(--subtext);
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    #notes-panel strong {
+      color: var(--text);
+    }
+
+
+    #slide-badge {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 1rem;
+      font-size: 0.7rem;
+      color: var(--subtext);
+      opacity: 0.5;
+    }
+
+
+    #thumb-strip {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      overflow-x: auto;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .thumb {
+      flex-shrink: 0;
+      width: 100px;
+      height: 65px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      text-align: center;
+      padding: 4px;
+      overflow: hidden;
+      transition: border-color 120ms;
+    }
+
+    .thumb.active {
+      border-color: var(--accent);
+    }
+
+
+    @media (max-width: 600px) {
+      .slide { padding: 2rem 1.5rem; }
+      #nav button { min-width: 60px; padding: 0.35rem 0.7rem; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+
+<body>
+<div id="app"
+     x-data="presentation()"
+     x-init="init()"
+     @keydown.window="handleKey($event)">
+
+
+
+  <div id="progress-bar-wrap">
+    <div id="progress-bar" :style="`width:${progress}%`"></div>
+  </div>
+
+
+
+  <div id="slides-viewport">
+    <template x-for="(slide, index) in slides" :key="index">
+
+      <section class="slide"
+               :data-type="slide.type"
+               x-show="current === index"
+               x-transition:enter="ts-enter"
+               x-transition:enter-start="ts-enter-start"
+               x-transition:enter-end="ts-enter-end"
+               x-transition:leave="ts-leave"
+               x-transition:leave-start="ts-leave-start"
+               x-transition:leave-end="ts-leave-end">
+
+        <h1 class="slide-title" x-text="slide.title" x-show="slide.title"></h1>
+        <div class="slide-content" x-html="slide.content"></div>
+        <span id="slide-badge" x-text="`${index + 1} / ${slides.length}`"></span>
+      </section>
+    </template>
+  </div>
+
+
+  <div id="notes-panel" x-show="slides[current] && slides[current].notes">
+    <strong>Notes:</strong>
+    <span x-text="slides[current] ? slides[current].notes : ''"></span>
+  </div>
+
+
+
+  <div id="nav">
+    <button @click="prev()" :disabled="current === 0">&#8592; Prev</button>
+    <span id="slide-counter" x-text="`${current + 1} / ${slides.length}`"></span>
+    <button @click="next()" :disabled="current === slides.length - 1">Next &#8594;</button>
+    <button id="fullscreen-btn" @click="toggleFullscreen()" title="Fullscreen">&#9974;</button>
+    <button @click="showThumbs = !showThumbs" title="Thumbnails">&#9783;</button>
+  </div>
+
+
+  <div id="thumb-strip" x-show="showThumbs">
+    <template x-for="(slide, index) in slides" :key="index">
+      <div class="thumb"
+           :class="{ active: current === index }"
+           @click="goto(index)"
+           x-text="(index + 1) + '. ' + (slide.title || '…')">
+      </div>
+    </template>
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<script>
+  function presentation() {
+    return {
+      current: 0,
+      showThumbs: false,
+      slides: [{"type":"title","title":"claude-baseline-go","content":"","notes":""},{"type":"content","title":"Team-shared Claude AI configuration for consistent, safe, context-aware behavior","content":"<hr>","notes":""},{"type":"content","title":"What This Repo Is","content":"<p>A scaffold template for wiring Claude Code into a Go project.</p>\n<p>Ships pre-configured:</p>\n<ul>\n<li><strong>Hooks</strong> — pre-bash, post-tool-use</li>\n<li><strong>Permissions</strong> — allow/deny lists</li>\n<li><strong>MCP connections</strong> — GitHub, Postgres, Datadog</li>\n<li><strong>Rules</strong> — architecture, conventions, testing, security</li>\n<li><strong>Commands</strong> — <code>/review</code>, <code>/standup</code>, <code>/db-schema</code></li>\n<li><strong>Skills</strong> — auto-triggered prompts</li>\n</ul>\n<blockquote>\n<p>Teams fork it and fill in the stubs.</p>\n</blockquote>\n<hr>","notes":""},{"type":"content","title":"Live vs Stub","content":"<table>\n<thead>\n<tr>\n<th>Path</th>\n<th>Status</th>\n<th>Notes</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>.claude/settings.json</code></td>\n<td>Live</td>\n<td>Permissions + hooks wired</td>\n</tr>\n<tr>\n<td><code>.claude/hooks/pre-bash.sh</code></td>\n<td>Live</td>\n<td>Blocks forbidden patterns via <code>jq</code></td>\n</tr>\n<tr>\n<td><code>.claude/hooks/post-tool-use.sh</code></td>\n<td>Live</td>\n<td>Audit log + failure alerts</td>\n</tr>\n<tr>\n<td><code>.claude/rules/*.md</code></td>\n<td>Partial stubs</td>\n<td>Scaffold defaults filled in</td>\n</tr>\n<tr>\n<td><code>.claude/commands/</code></td>\n<td>Live</td>\n<td><code>/review</code>, <code>/standup</code>, <code>/db-schema</code> functional</td>\n</tr>\n<tr>\n<td><code>.claude/skills/</code></td>\n<td>Live</td>\n<td>All auto-trigger skills functional</td>\n</tr>\n<tr>\n<td><code>.mcp.json</code></td>\n<td>Live config, disabled locally</td>\n<td>Requires env vars</td>\n</tr>\n<tr>\n<td><code>main.go</code></td>\n<td>Placeholder</td>\n<td>GoLand demo — not real entry point</td>\n</tr>\n</tbody>\n</table>\n<hr>","notes":""},{"type":"content","title":"How It Works","content":"<p>Claude reads configuration files at startup.</p>\n<table>\n<thead>\n<tr>\n<th>File / Folder</th>\n<th>Committed</th>\n<th>Purpose</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>CLAUDE.md</code></td>\n<td>Yes</td>\n<td>What Claude knows about the project</td>\n</tr>\n<tr>\n<td><code>CLAUDE.local.md</code></td>\n<td><strong>No</strong></td>\n<td>Personal overrides</td>\n</tr>\n<tr>\n<td><code>.mcp.json</code></td>\n<td>Yes</td>\n<td>External tool connections</td>\n</tr>\n<tr>\n<td><code>.claude/settings.json</code></td>\n<td>Yes</td>\n<td>Allow / deny list</td>\n</tr>\n<tr>\n<td><code>.claude/rules/</code></td>\n<td>Yes</td>\n<td>Detailed rule chapters</td>\n</tr>\n<tr>\n<td><code>.claude/commands/</code></td>\n<td>Yes</td>\n<td>Prompts you trigger</td>\n</tr>\n<tr>\n<td><code>.claude/skills/</code></td>\n<td>Yes</td>\n<td>Prompts Claude triggers automatically</td>\n</tr>\n<tr>\n<td><code>.claude/hooks/</code></td>\n<td>Yes</td>\n<td>Shell scripts on Claude events</td>\n</tr>\n</tbody>\n</table>\n<hr>","notes":""},{"type":"content","title":"Setup — 4 Steps","content":"<p><strong>1. Copy <code>CLAUDE.local.md</code></strong>\nAlready gitignored. Edit directly. Never commit.</p>\n<p><strong>2. Set env vars for MCP</strong></p>\n<pre><code class=\"language-bash\">export GITHUB_TOKEN=...\nexport DATABASE_URL=postgres://...\nexport DD_API_KEY=...\nexport DD_APP_KEY=...\nexport DD_SITE=datadoghq.eu\n</code></pre>\n<p><strong>3. Fill in the rules</strong>\n<code>.claude/rules/01-architecture.md</code> → system overview, data flow<br>\n<code>.claude/rules/02-conventions.md</code> → naming, layout, forbidden patterns<br>\n<code>.claude/rules/03-testing.md</code> → framework, coverage targets<br>\n<code>.claude/rules/04-security.md</code> → secrets, auth model, vuln classes</p>\n<p><strong>4. Fix the hooks</strong></p>\n<pre><code class=\"language-bash\">chmod +x .claude/hooks/*.sh\n</code></pre>\n<hr>","notes":""},{"type":"content","title":"Minimal Fork Path","content":"<p>Start small. Add layers only when a concrete feature requires them.</p>\n<pre><code>Stage 1 — no database yet\n  cmd/main.go\n  internal/\n    domain/    (value types + errors only)\n    service/   (business logic, defines its own interfaces)\n    handler/   (HTTP, imports service only)\n\nStage 2 — add persistence\n  internal/\n    repository/  (add when you have a real DB)\n\nStage 3 — scale\n  Split service/ into sub-packages by domain noun\n  Add internal/platform/ for cross-cutting concerns\n</code></pre>\n<blockquote>\n<p>Rule: never add a layer &quot;just in case.&quot;</p>\n</blockquote>\n<hr>","notes":""},{"type":"content","title":"Commands — You Trigger These","content":"<p>Type <code>/command-name</code> in Claude.</p>\n<table>\n<thead>\n<tr>\n<th>Command</th>\n<th>What it does</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>/review</code></td>\n<td>Review diff or file for bugs, conventions, security</td>\n</tr>\n<tr>\n<td><code>/standup</code></td>\n<td>Standup summary from yesterday's git log</td>\n</tr>\n<tr>\n<td><code>/db-schema</code></td>\n<td>Fetch DB schema via MCP postgres connection</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Add a command:</strong> create <code>.claude/commands/your-command.md</code><br>\nDescribe what Claude should do. Use <code>$ARGUMENTS</code> for user input.</p>\n<hr>","notes":""},{"type":"content","title":"Skills — Claude Triggers Automatically","content":"<table>\n<thead>\n<tr>\n<th>Skill</th>\n<th>Trigger</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>on-new-file</code></td>\n<td>Claude just created a source file</td>\n</tr>\n<tr>\n<td><code>pre-commit-check</code></td>\n<td>Claude is about to suggest <code>git commit</code></td>\n</tr>\n<tr>\n<td><code>explain-error</code></td>\n<td>A command exited non-zero</td>\n</tr>\n<tr>\n<td><code>c4-architecture</code></td>\n<td>Designing or documenting system architecture</td>\n</tr>\n<tr>\n<td><code>solid-principles</code></td>\n<td>Creating a package or designing an interface</td>\n</tr>\n<tr>\n<td><code>frontend-design</code></td>\n<td>Building or reviewing web UI</td>\n</tr>\n<tr>\n<td><code>caveman</code></td>\n<td>User types <code>/caveman</code></td>\n</tr>\n</tbody>\n</table>\n<p><strong>Add a skill:</strong> create <code>.claude/skills/your-skill.md</code><br>\nStart with a <code>**Trigger:**</code> line.</p>\n<hr>","notes":""},{"type":"content","title":"Versioned Skills via GitHub Packages","content":"<p>Skills distributed as versioned npm packages.</p>\n<pre><code>@team/caveman-skill  (GitHub Packages, versioned)\n        ↓\n@team/claude-skills  (GitHub Packages, versioned)\n        ↓\nconsumer repo  →  npm install &amp;&amp; npm run setup:claude\n</code></pre>\n<p><strong>One-time setup — <code>.npmrc</code>:</strong></p>\n<pre><code class=\"language-ini\">@team:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}\n</code></pre>\n<p><strong>Install:</strong></p>\n<pre><code class=\"language-bash\">npm install\nnpm run setup:claude   # copies skills → .claude/skills/\n</code></pre>\n<hr>","notes":""},{"type":"content","title":"Hooks — Shell Scripts on Events","content":"<table>\n<thead>\n<tr>\n<th>Hook</th>\n<th>Event</th>\n<th>What it does</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>pre-bash.sh</code></td>\n<td>Before every Bash call</td>\n<td>Blocks forbidden command patterns</td>\n</tr>\n<tr>\n<td><code>post-tool-use.sh</code></td>\n<td>After every tool call</td>\n<td>Audit log + failure alerts</td>\n</tr>\n</tbody>\n</table>\n<p>Payloads delivered as <strong>JSON via stdin</strong> — parse with <code>jq</code>.</p>\n<pre><code class=\"language-bash\">chmod +x .claude/hooks/*.sh\n</code></pre>\n<hr>","notes":""},{"type":"content","title":"Settings — Allow / Deny","content":"<p><code>.claude/settings.json</code> controls what Claude can run.</p>\n<ul>\n<li><strong>allow</strong> — commands Claude runs without prompting</li>\n<li><strong>deny</strong> — commands Claude can never run, even if asked</li>\n</ul>\n<p>Ships with safe defaults for a Go project.</p>\n<blockquote>\n<p>Edit to match your toolchain.</p>\n</blockquote>\n<hr>","notes":""},{"type":"content","title":"Known Issues — Fix Before Production","content":"<ol>\n<li><code>settings.json</code> — replace <code>Bash(go lint:*)</code> with <code>Bash(golangci-lint:*)</code></li>\n<li><code>main.go</code> — remove GoLand TIP comments; fix <code>fmt.Println</code> → <code>fmt.Printf</code></li>\n<li>Rules stubs — fill team-specific sections: system overview, auth model, coverage</li>\n</ol>\n<hr>","notes":""},{"type":"content","title":"Adding a New Team Member","content":"<ol>\n<li>Clone repo</li>\n<li>Receive env var template out-of-band (never commit secrets)</li>\n<li>Edit <code>CLAUDE.local.md</code> with personal preferences</li>\n<li><code>chmod +x .claude/hooks/*.sh</code></li>\n<li>Check <code>settings.local.json</code> — remove disabled MCP servers you need</li>\n<li>Start Claude — configuration is automatic</li>\n</ol>","notes":""}],
+
+      get progress() {
+        if (this.slides.length <= 1) return 100;
+        return Math.round((this.current / (this.slides.length - 1)) * 100);
+      },
+
+      init() {
+
+      },
+
+      next() {
+        if (this.current < this.slides.length - 1) this.current++;
+      },
+
+      prev() {
+        if (this.current > 0) this.current--;
+      },
+
+      goto(index) {
+        if (index >= 0 && index < this.slides.length) this.current = index;
+      },
+
+      handleKey(e) {
+
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); this.next(); }
+        if (e.key === 'ArrowLeft')                   { e.preventDefault(); this.prev(); }
+        if (e.key === 'Home')                        { e.preventDefault(); this.goto(0); }
+        if (e.key === 'End')                         { e.preventDefault(); this.goto(this.slides.length - 1); }
+        if (e.key === 'f' || e.key === 'F')          { this.toggleFullscreen(); }
+        if (e.key === 't' || e.key === 'T')          { this.showThumbs = !this.showThumbs; }
+
+      },
+
+      toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      },
+    };
+  }
+</script>
+</body>
+</html>
