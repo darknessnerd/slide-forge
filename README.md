@@ -81,18 +81,56 @@ log_level: ${env:LOG_LEVEL=info}
 
 ---
 
-## Deploying as a public HTTP server
+## Running in HTTP mode
+
+### 1. Start the server
 
 ```bash
 MCP_TRANSPORT=http ADDR=:8080 go run ./cmd
 ```
 
-Exposes:
-- `POST /mcp/` — MCP Streamable HTTP endpoint
-- `GET /health` — liveness probe
-- `GET /ready` — readiness probe
+Or with a pre-built binary:
 
-Remote clients connect via:
+```bash
+go build -o slide-forge ./cmd
+MCP_TRANSPORT=http ADDR=:8080 ./slide-forge
+```
+
+### 2. Verify it's up
+
+```bash
+curl http://localhost:8080/health
+# → {"status":"ok"}
+
+curl http://localhost:8080/ready
+# → {"status":"ready"}
+```
+
+### 3. Call the tool directly (curl)
+
+```bash
+curl -X POST http://localhost:8080/mcp/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+      "name": "md_to_html_slides",
+      "arguments": {
+        "markdown": "# Hello\n\n## Slide two\n\nBody text.",
+        "theme": "dark",
+        "transition_style": "slide"
+      }
+    }
+  }'
+```
+
+Response contains the full standalone HTML in `result.content[0].text`. Write it to a file and open in a browser.
+
+### 4. Connect Claude Code to a remote server
+
+In `.mcp.json` (or `~/.claude/mcp.json`):
 
 ```json
 {
@@ -104,6 +142,14 @@ Remote clients connect via:
   }
 }
 ```
+
+Then use it the same way as local:
+
+```
+Convert README.md into slides using the slide-forge tool. Use corporate theme.
+```
+
+> **Note:** HTTP mode is not production-ready yet — see TODO section below.
 
 ---
 
