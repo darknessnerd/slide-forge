@@ -1,4 +1,4 @@
-module github.com/your-org/your-repo
+module github.com/darknessnerd/slide-forge
 
 go 1.26
 

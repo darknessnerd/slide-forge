@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/your-org/your-repo/internal/domain"
-	"github.com/your-org/your-repo/internal/service"
+	"github.com/darknessnerd/slide-forge/internal/domain"
+	"github.com/darknessnerd/slide-forge/internal/service"
 )
 
 type toolArgs struct {

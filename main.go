@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/your-org/your-repo/internal/config"
-	"github.com/your-org/your-repo/internal/handler"
+	"github.com/darknessnerd/slide-forge/internal/config"
+	"github.com/darknessnerd/slide-forge/internal/handler"
 )
 
 func main() {

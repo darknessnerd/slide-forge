@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/your-org/your-repo/internal/domain"
+	"github.com/darknessnerd/slide-forge/internal/domain"
 )
 
 func TestParse_EmptyInput(t *testing.T) {

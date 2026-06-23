@@ -8,8 +8,8 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/your-org/your-repo/internal/derr"
-	"github.com/your-org/your-repo/internal/domain"
+	"github.com/darknessnerd/slide-forge/internal/derr"
+	"github.com/darknessnerd/slide-forge/internal/domain"
 )
 
 //go:embed templates/presentation.html.tmpl
