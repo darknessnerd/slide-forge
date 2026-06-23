@@ -162,3 +162,13 @@ MCP_TRANSPORT=http go run ./cmd
 # run with debug logging
 LOG_LEVEL=debug go run ./cmd
 ```
+
+---
+
+## TODO — before HTTP production deployment
+
+- [ ] **Auth** — bearer token middleware in `internal/handler/` before `/mcp/` is exposed publicly
+- [ ] **TLS** — put behind reverse proxy (nginx/caddy) or add `ListenAndServeTLS`; plain HTTP not acceptable for public endpoints
+- [ ] **Body size limit** — wrap MCP handler with `http.MaxBytesReader` to prevent oversized payloads
+- [ ] **Rate limiting** — add per-IP rate limiter middleware to prevent abuse
+- [ ] **Test coverage** — currently 51.7%; CI floor is 80%; need tests for `internal/config`, `internal/derr`, HTTP handler paths
