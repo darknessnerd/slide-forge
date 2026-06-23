@@ -9,9 +9,20 @@ MCP server that converts Markdown into standalone HTML slide presentations. Sing
 
 ---
 
-## Quick start (local dev)
+## Local development setup
 
-Claude Code spawns the server automatically via stdio. Add to your project's `.mcp.json`:
+### 1. Clone and verify it builds
+
+```bash
+git clone https://github.com/darknessnerd/slide-forge.git
+cd slide-forge
+go build ./...
+go test -race ./...
+```
+
+### 2. Wire it into Claude Code
+
+Add to your project's `.mcp.json` (or `~/.claude/mcp.json` for global use):
 
 ```json
 {
@@ -19,13 +30,54 @@ Claude Code spawns the server automatically via stdio. Add to your project's `.m
     "slide-forge": {
       "command": "go",
       "args": ["run", "."],
-      "cwd": "/path/to/slide-forge"
+      "cwd": "/absolute/path/to/slide-forge"
     }
   }
 }
 ```
 
-**Prereq:** Go 1.21+. No env vars needed.
+Claude Code spawns the process automatically on startup via stdio — no env vars needed.
+
+**Prereq:** Go 1.21+.
+
+### 3. Verify the tool is available
+
+Open Claude Code in any project and ask:
+
+```
+List available MCP tools.
+```
+
+You should see `md_to_html_slides` in the list.
+
+### 4. Try it
+
+```
+Convert README.md into slides using the slide-forge tool.
+Use corporate theme. Save to README-slides.html.
+```
+
+Open the generated `.html` file in any browser — no server required.
+
+---
+
+## Configuration
+
+Config is loaded from `config/config.yaml` (or `CONFIG_PATH` env var). All values support `${env:VAR=default}` substitution.
+
+```yaml
+# config/config.yaml
+transport: ${env:MCP_TRANSPORT=stdio}
+addr:      ${env:ADDR=:8080}
+log_level: ${env:LOG_LEVEL=info}
+```
+
+| Variable | Default | Description |
+|---|---|---|
+| `MCP_TRANSPORT` | `stdio` | `stdio` for Claude Code local use, `http` for remote/public |
+| `ADDR` | `:8080` | HTTP listen address (HTTP mode only) |
+| `LOG_LEVEL` | `info` | `debug`, `info`, `warn`, `error` |
+| `CONFIG_PATH` | `./config/config.yaml` | Path to config file |
 
 ---
 
@@ -35,27 +87,23 @@ Claude Code spawns the server automatically via stdio. Add to your project's `.m
 MCP_TRANSPORT=http ADDR=:8080 go run .
 ```
 
-The server exposes a single endpoint: `POST /mcp`
+Exposes:
+- `POST /mcp/` — MCP Streamable HTTP endpoint
+- `GET /health` — liveness probe
+- `GET /ready` — readiness probe
 
-Clients connect via:
+Remote clients connect via:
 
 ```json
 {
   "mcpServers": {
     "slide-forge": {
       "type": "http",
-      "url": "https://your-domain.com/mcp"
+      "url": "https://your-domain.com/mcp/"
     }
   }
 }
 ```
-
-### Environment variables
-
-| Variable | Default | Description |
-|---|---|---|
-| `MCP_TRANSPORT` | `stdio` | `stdio` for local Claude Code use, `http` for remote/public |
-| `ADDR` | `:8080` | Listen address (HTTP mode only) |
 
 ---
 
@@ -72,40 +120,45 @@ Clients connect via:
 
 Returns full HTML as a string. Write it to a `.html` file and open in any browser.
 
-### Example prompt
-
-```
-Convert README.md into slides using the slide-forge tool.
-Use corporate theme. Save to README-slides.html.
-```
-
 ---
 
 ## Project layout
 
 ```
-main.go                   ← entry point; MCP_TRANSPORT selects stdio vs http
+main.go                      ← entry point; transport selection, health endpoints
+config/config.yaml           ← default config with ${env:VAR=default} placeholders
 internal/
-  domain/slide.go         ← value types (Slide, Theme, RenderRequest, …)
-  service/parser.go       ← Markdown → []Slide
-  service/renderer.go     ← []Slide → HTML string
-  handler/mcp.go          ← MCP tool registration and request handling
+  config/                    ← AppConfig struct + YAML loader
+  derr/                      ← DError: structured errors with Kind + Op + Msg
+  domain/slide.go            ← value types (Slide, Theme, RenderRequest, …)
+  service/parser.go          ← Markdown → []Slide
+  service/renderer.go        ← []Slide → HTML string
+  handler/mcp.go             ← MCP tool registration and request handling
 ```
 
 ---
 
-## Development
+## Development commands
 
 ```bash
-# run tests
+# build
+go build ./...
+
+# tests
 go test ./...
 
-# run with race detector
+# tests with race detector (required before commit)
 go test -race ./...
 
-# start locally in stdio mode (default)
+# coverage report
+go test -coverprofile=coverage.out ./... && go tool cover -func=coverage.out
+
+# run in stdio mode (default — used by Claude Code)
 go run .
 
-# start as HTTP server
+# run as HTTP server
 MCP_TRANSPORT=http go run .
+
+# run with debug logging
+LOG_LEVEL=debug go run .
 ```
