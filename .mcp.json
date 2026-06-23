@@ -11,7 +11,7 @@
     "slide-forge": {
       "_comment": "Converts Markdown to standalone HTML slides. Runs locally via stdio (default). No env vars required.",
       "command": "go",
-      "args": ["run", "."],
+      "args": ["run", "./cmd"],
       "cwd": "${workspaceFolder}"
     },
     "github": {

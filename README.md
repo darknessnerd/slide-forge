@@ -29,7 +29,7 @@ Add to your project's `.mcp.json` (or `~/.claude/mcp.json` for global use):
   "mcpServers": {
     "slide-forge": {
       "command": "go",
-      "args": ["run", "."],
+      "args": ["run", "./cmd"],
       "cwd": "/absolute/path/to/slide-forge"
     }
   }
@@ -84,7 +84,7 @@ log_level: ${env:LOG_LEVEL=info}
 ## Deploying as a public HTTP server
 
 ```bash
-MCP_TRANSPORT=http ADDR=:8080 go run .
+MCP_TRANSPORT=http ADDR=:8080 go run ./cmd
 ```
 
 Exposes:
@@ -125,7 +125,7 @@ Returns full HTML as a string. Write it to a `.html` file and open in any browse
 ## Project layout
 
 ```
-main.go                      ← entry point; transport selection, health endpoints
+cmd/main.go                  ← entry point; transport selection, health endpoints
 config/config.yaml           ← default config with ${env:VAR=default} placeholders
 internal/
   config/                    ← AppConfig struct + YAML loader
@@ -154,11 +154,11 @@ go test -race ./...
 go test -coverprofile=coverage.out ./... && go tool cover -func=coverage.out
 
 # run in stdio mode (default — used by Claude Code)
-go run .
+go run ./cmd
 
 # run as HTTP server
-MCP_TRANSPORT=http go run .
+MCP_TRANSPORT=http go run ./cmd
 
 # run with debug logging
-LOG_LEVEL=debug go run .
+LOG_LEVEL=debug go run ./cmd
 ```
