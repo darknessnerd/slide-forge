@@ -1,12 +1,57 @@
-# claude-baseline-go
+# slide-forge
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-6B48FF?logo=anthropic&logoColor=white)
-![MCP](https://img.shields.io/badge/MCP-GitHub%20%7C%20Postgres%20%7C%20Datadog-0078D4?logo=amazonwebservices&logoColor=white)
+![MCP](https://img.shields.io/badge/MCP-slide--forge-0078D4?logo=amazonwebservices&logoColor=white)
 ![Go](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go&logoColor=white)
-![Hooks](https://img.shields.io/badge/hooks-bash-4EAA25?logo=gnubash&logoColor=white)
 ![Maintained](https://img.shields.io/badge/maintained-yes-brightgreen)
 
-Team-shared Claude AI configuration for consistent, safe, context-aware behavior across the codebase.
+MCP server that converts Markdown into standalone HTML slide presentations. No external services — runs locally, outputs a single portable `.html` file.
+
+---
+
+## Using slide-forge as an MCP Server
+
+### 1. Add to `.mcp.json`
+
+Point Claude at the repo root — no build step required:
+
+```json
+{
+  "mcpServers": {
+    "slide-forge": {
+      "command": "go",
+      "args": ["run", "."],
+      "cwd": "/path/to/slide-forge"
+    }
+  }
+}
+```
+
+**Prereq:** Go 1.21+ installed. Run `go run .` once to verify it starts.
+
+### 2. Call the tool from Claude
+
+Claude gains access to one tool: `md_to_html_slides`.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `markdown` | string | Yes | Markdown content to convert |
+| `theme` | string | No | `light` (default), `dark`, `minimal`, `corporate` |
+| `transition_style` | string | No | `fade` (default), `slide`, `none` |
+| `enable_keyboard_navigation` | bool | No | Arrow / Space nav (default `true`) |
+| `include_progress_bar` | bool | No | Progress bar at top (default `true`) |
+| `include_speaker_notes` | bool | No | Speaker notes panel (default `true`) |
+
+Returns the full HTML as a string — write it to a `.html` file and open in any browser.
+
+### 3. Example prompt
+
+```
+Convert README.md into slides using the slide-forge tool.
+Use corporate theme. Save the output to README-slides.html.
+```
+
+---
 
 ---
 
