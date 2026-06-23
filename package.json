@@ -1,0 +1,13 @@
+{
+  "name": "claude-scaffold-go",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@team/claude-skills": "*"
+  },
+  "scripts": {
+    "setup:claude": "claude-skills install"
+  }
+}

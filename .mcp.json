@@ -1,0 +1,38 @@
+{
+  "_comment": [
+    "MCP servers give Claude access to external tools (GitHub, DB, Datadog).",
+    "All credentials come from environment variables — never hardcode values here.",
+    "Add this file to git; secrets are injected at runtime via env.",
+    "Each server is a local npx process — no data leaves your machine except",
+    "through the server's own API calls to the named service.",
+    "See: https://docs.anthropic.com/en/docs/claude-code/mcp"
+  ],
+  "mcpServers": {
+    "github": {
+      "_comment": "Gives Claude read/write access to GitHub: PRs, issues, branches, code search. Set GITHUB_TOKEN to a PAT with repo scope.",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "postgres": {
+      "_comment": "Gives Claude read access to your database schema and data. Use a read-only role for DATABASE_URL in production — never a superuser.",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "${DATABASE_URL}"
+      }
+    },
+    "datadog": {
+      "_comment": "Gives Claude access to Datadog metrics, logs, and monitors. DD_SITE: 'datadoghq.com' (US) or 'datadoghq.eu' (EU).",
+      "command": "npx",
+      "args": ["-y", "@datadog/mcp-server-datadog"],
+      "env": {
+        "DD_API_KEY": "${DD_API_KEY}",
+        "DD_APP_KEY": "${DD_APP_KEY}",
+        "DD_SITE": "${DD_SITE}"
+      }
+    }
+  }
+}

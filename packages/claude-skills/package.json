@@ -1,0 +1,23 @@
+{
+  "name": "@team/claude-skills",
+  "version": "1.0.0",
+  "description": "Shared Claude Code skills for consistent AI behaviour across team repos",
+  "bin": {
+    "claude-skills": "./bin/install.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "dependencies": {
+    "caveman-installer": "github:JuliusBrussee/caveman"
+  },
+  "scripts": {
+    "test": "node bin/install.js --dry-run"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "keywords": ["claude", "claude-code", "ai", "skills"],
+  "license": "MIT"
+}

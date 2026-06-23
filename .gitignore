@@ -1,0 +1,9 @@
+CLAUDE.local.md
+.env
+.env.*
+node_modules/
+.claude/logs/
+.claude/skills/caveman.md
+graphify-out/cache/
+graphify-out/.graphify_python
+graphify-out/.graphify_root

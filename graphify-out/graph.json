@@ -1,0 +1,2988 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "he_hook_enforcement_layer",
+        "label": "Two-layer command enforcement: settings.json deny list + pre-bash.sh hard safety net",
+        "nodes": [
+          "settings_json",
+          "hooks_pre_bash",
+          "hooks_pre_bash_blockedpatterns"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".claude/hooks/pre-bash.sh"
+      },
+      {
+        "id": "he_mcp_servers",
+        "label": "MCP server trio: GitHub, Postgres, Datadog \u2014 all env-var credentials, no hardcoding",
+        "nodes": [
+          "mcp_json",
+          "mcp_github_server",
+          "mcp_postgres_server",
+          "mcp_datadog_server"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".mcp.json"
+      },
+      {
+        "id": "he_skill_install_pipeline",
+        "label": "Skill install pipeline: package.json \u2192 install.js \u2192 team skills + caveman-installer \u2192 .claude/skills/",
+        "nodes": [
+          "package_json",
+          "claude_skills_install_js",
+          "caveman_installer",
+          "claude_skills_target_dir"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "packages/claude-skills/bin/install.js"
+      },
+      {
+        "id": "he_security_enforcement_triad",
+        "label": "Security enforcement triad: security rules, gosec linter, pre-commit check",
+        "nodes": [
+          "rules_04_security_security_rules",
+          "golangci_yml_gosec",
+          "skills_pre_commit_check_skill"
+        ],
+        "relation": "implement",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": ".claude/rules/04-security.md"
+      },
+      {
+        "id": "he_ci_quality_gates",
+        "label": "CI quality gates enforced by testing rules, CI rules, and linter config",
+        "nodes": [
+          "rules_03_testing_testing_rules",
+          "rules_05_ci_ci_rules",
+          "golangci_yml_linter_config"
+        ],
+        "relation": "implement",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": ".claude/rules/05-ci.md"
+      },
+      {
+        "id": "he_auto_skill_cluster",
+        "label": "Auto-triggering skills cluster",
+        "nodes": [
+          "skills_on_new_file_skill",
+          "skills_pre_commit_check_skill",
+          "skills_explain_error_skill",
+          "skills_c4_architecture_skill",
+          "skills_solid_principles_skill",
+          "skills_frontend_design_skill"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "README.md"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "post-tool-use.sh",
+      "file_type": "code",
+      "source_file": ".claude/hooks/post-tool-use.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "hooks_post_tool_use",
+      "community": 6,
+      "norm_label": "post-tool-use.sh"
+    },
+    {
+      "label": "post-tool-use.sh script",
+      "file_type": "code",
+      "source_file": ".claude/hooks/post-tool-use.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "home_crinitib_workspace_personal_claude_scaffold_go_claude_hooks_post_tool_use_sh__entry",
+      "community": 6,
+      "norm_label": "post-tool-use.sh script"
+    },
+    {
+      "label": "pre-bash.sh",
+      "file_type": "code",
+      "source_file": ".claude/hooks/pre-bash.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "hooks_pre_bash",
+      "community": 6,
+      "norm_label": "pre-bash.sh"
+    },
+    {
+      "label": "pre-bash.sh script",
+      "file_type": "code",
+      "source_file": ".claude/hooks/pre-bash.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "home_crinitib_workspace_personal_claude_scaffold_go_claude_hooks_pre_bash_sh__entry",
+      "community": 6,
+      "norm_label": "pre-bash.sh script"
+    },
+    {
+      "label": ".mcp.json",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_config_file"
+      },
+      "_origin": "ast",
+      "id": "mcp",
+      "community": 4,
+      "norm_label": ".mcp.json"
+    },
+    {
+      "label": "github",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast",
+      "id": "mcp_mcp_server_github",
+      "community": 4,
+      "norm_label": "github"
+    },
+    {
+      "label": "npx",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_command"
+      },
+      "_origin": "ast",
+      "id": "mcp_command_npx",
+      "community": 4,
+      "norm_label": "npx"
+    },
+    {
+      "label": "@modelcontextprotocol/server-github",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_package"
+      },
+      "_origin": "ast",
+      "id": "mcp_package_modelcontextprotocol_server_github",
+      "community": 4,
+      "norm_label": "@modelcontextprotocol/server-github"
+    },
+    {
+      "label": "GITHUB_PERSONAL_ACCESS_TOKEN",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "env_var"
+      },
+      "_origin": "ast",
+      "id": "env_var_github_personal_access_token",
+      "community": 4,
+      "norm_label": "github_personal_access_token"
+    },
+    {
+      "label": "postgres",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast",
+      "id": "mcp_mcp_server_postgres",
+      "community": 4,
+      "norm_label": "postgres"
+    },
+    {
+      "label": "@modelcontextprotocol/server-postgres",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_package"
+      },
+      "_origin": "ast",
+      "id": "mcp_package_modelcontextprotocol_server_postgres",
+      "community": 4,
+      "norm_label": "@modelcontextprotocol/server-postgres"
+    },
+    {
+      "label": "POSTGRES_CONNECTION_STRING",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "env_var"
+      },
+      "_origin": "ast",
+      "id": "env_var_postgres_connection_string",
+      "community": 4,
+      "norm_label": "postgres_connection_string"
+    },
+    {
+      "label": "datadog",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast",
+      "id": "mcp_mcp_server_datadog",
+      "community": 4,
+      "norm_label": "datadog"
+    },
+    {
+      "label": "@datadog/mcp-server-datadog",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_package"
+      },
+      "_origin": "ast",
+      "id": "mcp_package_datadog_mcp_server_datadog",
+      "community": 4,
+      "norm_label": "@datadog/mcp-server-datadog"
+    },
+    {
+      "label": "DD_API_KEY",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "env_var"
+      },
+      "_origin": "ast",
+      "id": "env_var_dd_api_key",
+      "community": 4,
+      "norm_label": "dd_api_key"
+    },
+    {
+      "label": "DD_APP_KEY",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "env_var"
+      },
+      "_origin": "ast",
+      "id": "env_var_dd_app_key",
+      "community": 4,
+      "norm_label": "dd_app_key"
+    },
+    {
+      "label": "DD_SITE",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "env_var"
+      },
+      "_origin": "ast",
+      "id": "env_var_dd_site",
+      "community": 4,
+      "norm_label": "dd_site"
+    },
+    {
+      "label": "main.go",
+      "file_type": "code",
+      "source_file": "main.go",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "main",
+      "community": 11,
+      "norm_label": "main.go"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "main.go",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "main_main",
+      "community": 11,
+      "norm_label": "main()"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "package",
+      "community": 7,
+      "norm_label": "package.json"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "package_name",
+      "community": 7,
+      "norm_label": "name"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "package_private",
+      "community": 7,
+      "norm_label": "private"
+    },
+    {
+      "label": "workspaces",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "package_workspaces",
+      "community": 7,
+      "norm_label": "workspaces"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "package_devdependencies",
+      "community": 7,
+      "norm_label": "devdependencies"
+    },
+    {
+      "label": "@team/claude-skills",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "package_devdependencies_team_claude_skills",
+      "community": 7,
+      "norm_label": "@team/claude-skills"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "package_scripts",
+      "community": 7,
+      "norm_label": "scripts"
+    },
+    {
+      "label": "setup:claude",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "package_scripts_setup_claude",
+      "community": 7,
+      "norm_label": "setup:claude"
+    },
+    {
+      "label": "install.js",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "bin_install",
+      "community": 5,
+      "norm_label": "install.js"
+    },
+    {
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "bin_install_fs",
+      "community": 5,
+      "norm_label": "fs"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "bin_install_path",
+      "community": 5,
+      "norm_label": "path"
+    },
+    {
+      "label": "dryRun",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "bin_install_dryrun",
+      "community": 5,
+      "norm_label": "dryrun"
+    },
+    {
+      "label": "targetDir",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "bin_install_targetdir",
+      "community": 5,
+      "norm_label": "targetdir"
+    },
+    {
+      "label": "resolveNodeModules()",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "bin_install_resolvenodemodules",
+      "community": 5,
+      "norm_label": "resolvenodemodules()"
+    },
+    {
+      "label": "installFlatSkills()",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "bin_install_installflatskills",
+      "community": 5,
+      "norm_label": "installflatskills()"
+    },
+    {
+      "label": "installCavemanSkills()",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "bin_install_installcavemanskills",
+      "community": 5,
+      "norm_label": "installcavemanskills()"
+    },
+    {
+      "label": "copySkill()",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "bin_install_copyskill",
+      "community": 5,
+      "norm_label": "copyskill()"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude_skills_package",
+      "community": 3,
+      "norm_label": "package.json"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "claude_skills_package_name",
+      "community": 3,
+      "norm_label": "name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "claude_skills_package_version",
+      "community": 3,
+      "norm_label": "version"
+    },
+    {
+      "label": "description",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "claude_skills_package_description",
+      "community": 3,
+      "norm_label": "description"
+    },
+    {
+      "label": "bin",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "claude_skills_package_bin",
+      "community": 3,
+      "norm_label": "bin"
+    },
+    {
+      "label": "claude-skills",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "claude_skills_package_bin_claude_skills",
+      "community": 3,
+      "norm_label": "claude-skills"
+    },
+    {
+      "label": "files",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "claude_skills_package_files",
+      "community": 3,
+      "norm_label": "files"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "claude_skills_package_dependencies",
+      "community": 8,
+      "norm_label": "dependencies"
+    },
+    {
+      "label": "caveman-installer",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "claude_skills_package_dependencies_caveman_installer",
+      "community": 8,
+      "norm_label": "caveman-installer"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "claude_skills_package_scripts",
+      "community": 3,
+      "norm_label": "scripts"
+    },
+    {
+      "label": "test",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "claude_skills_package_scripts_test",
+      "community": 3,
+      "norm_label": "test"
+    },
+    {
+      "label": "publishConfig",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "claude_skills_package_publishconfig",
+      "community": 3,
+      "norm_label": "publishconfig"
+    },
+    {
+      "label": "registry",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "claude_skills_package_publishconfig_registry",
+      "community": 3,
+      "norm_label": "registry"
+    },
+    {
+      "label": "keywords",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "claude_skills_package_keywords",
+      "community": 3,
+      "norm_label": "keywords"
+    },
+    {
+      "label": "license",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "claude_skills_package_license",
+      "community": 3,
+      "norm_label": "license"
+    },
+    {
+      "label": "Tool Audit Log (.claude/logs/tool-audit.log)",
+      "file_type": "concept",
+      "source_file": ".claude/hooks/post-tool-use.sh",
+      "source_location": "17",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "hooks_post_tool_use_auditlog",
+      "community": 6,
+      "norm_label": "tool audit log (.claude/logs/tool-audit.log)"
+    },
+    {
+      "label": "BlockedPatterns (pre-bash hard safety net)",
+      "file_type": "concept",
+      "source_file": ".claude/hooks/pre-bash.sh",
+      "source_location": "15-22",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "hooks_pre_bash_blockedpatterns",
+      "community": 6,
+      "norm_label": "blockedpatterns (pre-bash hard safety net)"
+    },
+    {
+      "label": "settings.json (Claude Code permissions + hooks)",
+      "file_type": "document",
+      "source_file": ".claude/settings.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "settings_json",
+      "community": 6,
+      "norm_label": "settings.json (claude code permissions + hooks)"
+    },
+    {
+      "label": "settings.local.json (personal permission overrides)",
+      "file_type": "document",
+      "source_file": ".claude/settings.local.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "settings_local_json",
+      "community": 6,
+      "norm_label": "settings.local.json (personal permission overrides)"
+    },
+    {
+      "label": ".mcp.json (MCP server configuration)",
+      "file_type": "document",
+      "source_file": ".mcp.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "mcp_json",
+      "community": 1,
+      "norm_label": ".mcp.json (mcp server configuration)"
+    },
+    {
+      "label": "MCP GitHub Server (@modelcontextprotocol/server-github)",
+      "file_type": "concept",
+      "source_file": ".mcp.json",
+      "source_location": "11-18",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "mcp_github_server",
+      "community": 1,
+      "norm_label": "mcp github server (@modelcontextprotocol/server-github)"
+    },
+    {
+      "label": "MCP Postgres Server (@modelcontextprotocol/server-postgres)",
+      "file_type": "concept",
+      "source_file": ".mcp.json",
+      "source_location": "19-26",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "mcp_postgres_server",
+      "community": 1,
+      "norm_label": "mcp postgres server (@modelcontextprotocol/server-postgres)"
+    },
+    {
+      "label": "MCP Datadog Server (@datadog/mcp-server-datadog)",
+      "file_type": "concept",
+      "source_file": ".mcp.json",
+      "source_location": "27-36",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "mcp_datadog_server",
+      "community": 1,
+      "norm_label": "mcp datadog server (@datadog/mcp-server-datadog)"
+    },
+    {
+      "label": "main.go (Go entry point placeholder)",
+      "file_type": "code",
+      "source_file": "main.go",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "main_go",
+      "community": 12,
+      "norm_label": "main.go (go entry point placeholder)"
+    },
+    {
+      "label": "package.json (root workspace)",
+      "file_type": "document",
+      "source_file": "package.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "package_json",
+      "community": 8,
+      "norm_label": "package.json (root workspace)"
+    },
+    {
+      "label": "@team/claude-skills package.json",
+      "file_type": "document",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_skills_package_json",
+      "community": 8,
+      "norm_label": "@team/claude-skills package.json"
+    },
+    {
+      "label": "install.js (claude-skills CLI)",
+      "file_type": "code",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_skills_install_js",
+      "community": 8,
+      "norm_label": "install.js (claude-skills cli)"
+    },
+    {
+      "label": "caveman-installer (JuliusBrussee/caveman)",
+      "file_type": "concept",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "13",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "caveman_installer",
+      "community": 8,
+      "norm_label": "caveman-installer (juliusbrussee/caveman)"
+    },
+    {
+      "label": ".claude/skills/ (skill install target directory)",
+      "file_type": "concept",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "17",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_skills_target_dir",
+      "community": 8,
+      "norm_label": ".claude/skills/ (skill install target directory)"
+    },
+    {
+      "label": "/db-schema command",
+      "file_type": "document",
+      "source_file": ".claude/commands/db-schema.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "commands_db_schema",
+      "community": 1,
+      "norm_label": "/db-schema command"
+    },
+    {
+      "label": "/review command",
+      "file_type": "document",
+      "source_file": ".claude/commands/review.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "commands_review",
+      "community": 1,
+      "norm_label": "/review command"
+    },
+    {
+      "label": "/standup command",
+      "file_type": "document",
+      "source_file": ".claude/commands/standup.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "commands_standup",
+      "community": 1,
+      "norm_label": "/standup command"
+    },
+    {
+      "label": "01-architecture.md (Go layer architecture rules)",
+      "file_type": "document",
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_01_architecture",
+      "community": 1,
+      "norm_label": "01-architecture.md (go layer architecture rules)"
+    },
+    {
+      "label": "02-conventions.md (Go conventions)",
+      "file_type": "document",
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_02_conventions",
+      "community": 1,
+      "norm_label": "02-conventions.md (go conventions)"
+    },
+    {
+      "label": "All implementation packages must live under /internal/",
+      "file_type": "rationale",
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "arch_internal_only_rule",
+      "community": 1,
+      "norm_label": "all implementation packages must live under /internal/"
+    },
+    {
+      "label": "Layer dependency direction: handler \u2192 service \u2192 domain \u2190 repository",
+      "file_type": "rationale",
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "arch_layer_dependency_direction",
+      "community": 1,
+      "norm_label": "layer dependency direction: handler \u2192 service \u2192 domain \u2190 repository"
+    },
+    {
+      "label": "Observability interfaces in domain (Logger, MetricsRecorder) injected via constructor",
+      "file_type": "rationale",
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "arch_observability_interfaces",
+      "community": 1,
+      "norm_label": "observability interfaces in domain (logger, metricsrecorder) injected via constructor"
+    },
+    {
+      "label": "Interfaces belong in consuming package, not implementing package",
+      "file_type": "rationale",
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "conv_interface_in_consumer",
+      "community": 1,
+      "norm_label": "interfaces belong in consuming package, not implementing package"
+    },
+    {
+      "label": "Never store context.Context in a struct \u2014 pass as first parameter",
+      "file_type": "rationale",
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "conv_no_context_in_struct",
+      "community": 1,
+      "norm_label": "never store context.context in a struct \u2014 pass as first parameter"
+    },
+    {
+      "label": "Forbidden patterns: global mutable state, interface{}/any, init() with I/O, type switches for behavior",
+      "file_type": "rationale",
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "conv_forbidden_patterns",
+      "community": 1,
+      "norm_label": "forbidden patterns: global mutable state, interface{}/any, init() with i/o, type switches for behavior"
+    },
+    {
+      "label": "go.dev/wiki/CodeReviewComments (Go interface placement canon)",
+      "file_type": "document",
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "source_url": "https://go.dev/wiki/CodeReviewComments",
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "go_codereview_wiki",
+      "community": 1,
+      "norm_label": "go.dev/wiki/codereviewcomments (go interface placement canon)"
+    },
+    {
+      "label": "pkg.go.dev/context (context.Context usage guidelines)",
+      "file_type": "document",
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "source_url": "https://pkg.go.dev/context",
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "pkg_go_dev_context",
+      "community": 1,
+      "norm_label": "pkg.go.dev/context (context.context usage guidelines)"
+    },
+    {
+      "label": "Testing Rules",
+      "file_type": "document",
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_03_testing_testing_rules",
+      "community": 0,
+      "norm_label": "testing rules"
+    },
+    {
+      "label": "TDD Workflow (Red\u2192Green\u2192Refactor)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 51",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_03_testing_tdd_workflow",
+      "community": 0,
+      "norm_label": "tdd workflow (red\u2192green\u2192refactor)"
+    },
+    {
+      "label": "testify (assert/require/mock)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 5",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_03_testing_testify_framework",
+      "community": 0,
+      "norm_label": "testify (assert/require/mock)"
+    },
+    {
+      "label": "testcontainers-go (real DB in CI)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_03_testing_testcontainers",
+      "community": 0,
+      "norm_label": "testcontainers-go (real db in ci)"
+    },
+    {
+      "label": "Coverage Expectations (80% floor, 100% domain/service exports)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 13",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_03_testing_coverage_expectations",
+      "community": 0,
+      "norm_label": "coverage expectations (80% floor, 100% domain/service exports)"
+    },
+    {
+      "label": "What Must NOT Be Mocked (DB, context, sentinel errors, Logger)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 44",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_03_testing_must_not_mock",
+      "community": 0,
+      "norm_label": "what must not be mocked (db, context, sentinel errors, logger)"
+    },
+    {
+      "label": "LLM-as-judge grading for agent output tests",
+      "file_type": "concept",
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 65",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_03_testing_llm_grading",
+      "community": 0,
+      "norm_label": "llm-as-judge grading for agent output tests"
+    },
+    {
+      "label": "Security Rules",
+      "file_type": "document",
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_04_security_security_rules",
+      "community": 0,
+      "norm_label": "security rules"
+    },
+    {
+      "label": "Secrets Policy (no hardcode, no .env write, env vars only)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 5",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_04_security_secrets_policy",
+      "community": 2,
+      "norm_label": "secrets policy (no hardcode, no .env write, env vars only)"
+    },
+    {
+      "label": "Auth Model (RS256, JWT, JWKS, claims propagation via context)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 15",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_04_security_auth_model",
+      "community": 0,
+      "norm_label": "auth model (rs256, jwt, jwks, claims propagation via context)"
+    },
+    {
+      "label": "Vulnerability Classes (SQLi, XSS, SSRF, cmd injection, path traversal, open redirect)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 48",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_04_security_vulnerability_classes",
+      "community": 0,
+      "norm_label": "vulnerability classes (sqli, xss, ssrf, cmd injection, path traversal, open redirect)"
+    },
+    {
+      "label": "Dependency Security (go mod tidy, pin versions)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 58",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_04_security_dependency_security",
+      "community": 0,
+      "norm_label": "dependency security (go mod tidy, pin versions)"
+    },
+    {
+      "label": "JWT claims propagation via unexported context key",
+      "file_type": "concept",
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 19",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_04_security_jwt_context_pattern",
+      "community": 0,
+      "norm_label": "jwt claims propagation via unexported context key"
+    },
+    {
+      "label": "CI Gate Sequence",
+      "file_type": "document",
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_05_ci_ci_rules",
+      "community": 0,
+      "norm_label": "ci gate sequence"
+    },
+    {
+      "label": "7-Gate CI Pipeline (format\u2192vet\u2192lint\u2192unit\u2192race\u2192coverage\u2192integration)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_05_ci_gate_sequence",
+      "community": 0,
+      "norm_label": "7-gate ci pipeline (format\u2192vet\u2192lint\u2192unit\u2192race\u2192coverage\u2192integration)"
+    },
+    {
+      "label": "CI Linter Configuration (non-negotiable + recommended + blocked linters)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 37",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_05_ci_linter_config",
+      "community": 0,
+      "norm_label": "ci linter configuration (non-negotiable + recommended + blocked linters)"
+    },
+    {
+      "label": "Merge Requirements (7 gates, go mod tidy, no nolint on security, no races)",
+      "file_type": "concept",
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 59",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "rules_05_ci_merge_requirements",
+      "community": 0,
+      "norm_label": "merge requirements (7 gates, go mod tidy, no nolint on security, no races)"
+    },
+    {
+      "label": "Skill: c4-architecture",
+      "file_type": "document",
+      "source_file": ".claude/skills/c4-architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_c4_architecture_skill",
+      "community": 2,
+      "norm_label": "skill: c4-architecture"
+    },
+    {
+      "label": "C4 Model (4 levels: Context, Container, Component, Code)",
+      "file_type": "concept",
+      "source_file": ".claude/skills/c4-architecture.md",
+      "source_location": "line 9",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_c4_architecture_c4_model",
+      "community": 2,
+      "norm_label": "c4 model (4 levels: context, container, component, code)"
+    },
+    {
+      "label": "Mermaid diagram templates (C4 levels)",
+      "file_type": "concept",
+      "source_file": ".claude/skills/c4-architecture.md",
+      "source_location": "line 6",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_c4_architecture_mermaid_diagrams",
+      "community": 2,
+      "norm_label": "mermaid diagram templates (c4 levels)"
+    },
+    {
+      "label": "Skill: explain-error",
+      "file_type": "document",
+      "source_file": ".claude/skills/explain-error.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_explain_error_skill",
+      "community": 2,
+      "norm_label": "skill: explain-error"
+    },
+    {
+      "label": "Skill: frontend-design",
+      "file_type": "document",
+      "source_file": ".claude/skills/frontend-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_frontend_design_skill",
+      "community": 2,
+      "norm_label": "skill: frontend-design"
+    },
+    {
+      "label": "Design Token Three-Tier System (reference/system/component)",
+      "file_type": "concept",
+      "source_file": ".claude/skills/frontend-design.md",
+      "source_location": "line 15",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_frontend_design_token_system",
+      "community": 2,
+      "norm_label": "design token three-tier system (reference/system/component)"
+    },
+    {
+      "label": "WCAG 2.2 Accessibility (POUR, contrast ratios, keyboard model)",
+      "file_type": "concept",
+      "source_file": ".claude/skills/frontend-design.md",
+      "source_location": "line 129",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_frontend_design_wcag_accessibility",
+      "community": 2,
+      "norm_label": "wcag 2.2 accessibility (pour, contrast ratios, keyboard model)"
+    },
+    {
+      "label": "Typography constraints (45\u201390 char line length, type scale, typeface roles)",
+      "file_type": "concept",
+      "source_file": ".claude/skills/frontend-design.md",
+      "source_location": "line 79",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_frontend_design_typography",
+      "community": 2,
+      "norm_label": "typography constraints (45\u201390 char line length, type scale, typeface roles)"
+    },
+    {
+      "label": "Skill: on-new-file",
+      "file_type": "document",
+      "source_file": ".claude/skills/on-new-file.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_on_new_file_skill",
+      "community": 2,
+      "norm_label": "skill: on-new-file"
+    },
+    {
+      "label": "Skill: pre-commit-check",
+      "file_type": "document",
+      "source_file": ".claude/skills/pre-commit-check.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_pre_commit_check_skill",
+      "community": 2,
+      "norm_label": "skill: pre-commit-check"
+    },
+    {
+      "label": "Skill: solid-principles",
+      "file_type": "document",
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_solid_principles_skill",
+      "community": 9,
+      "norm_label": "skill: solid-principles"
+    },
+    {
+      "label": "SRP (Single Responsibility Principle) Go mapping",
+      "file_type": "concept",
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 12",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_solid_principles_srp",
+      "community": 9,
+      "norm_label": "srp (single responsibility principle) go mapping"
+    },
+    {
+      "label": "OCP (Open/Closed Principle) Go mapping",
+      "file_type": "concept",
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 26",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_solid_principles_ocp",
+      "community": 9,
+      "norm_label": "ocp (open/closed principle) go mapping"
+    },
+    {
+      "label": "LSP (Liskov Substitution Principle) Go mapping",
+      "file_type": "concept",
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 52",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_solid_principles_lsp",
+      "community": 9,
+      "norm_label": "lsp (liskov substitution principle) go mapping"
+    },
+    {
+      "label": "ISP (Interface Segregation Principle) Go mapping",
+      "file_type": "concept",
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 78",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_solid_principles_isp",
+      "community": 9,
+      "norm_label": "isp (interface segregation principle) go mapping"
+    },
+    {
+      "label": "DIP (Dependency Inversion Principle) Go mapping",
+      "file_type": "concept",
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 112",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skills_solid_principles_dip",
+      "community": 9,
+      "norm_label": "dip (dependency inversion principle) go mapping"
+    },
+    {
+      "label": ".golangci.yml linter configuration",
+      "file_type": "code",
+      "source_file": ".golangci.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "golangci_yml_linter_config",
+      "community": 0,
+      "norm_label": ".golangci.yml linter configuration"
+    },
+    {
+      "label": "errcheck linter (unchecked errors, type assertions, blank)",
+      "file_type": "concept",
+      "source_file": ".golangci.yml",
+      "source_location": "line 7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "golangci_yml_errcheck",
+      "community": 0,
+      "norm_label": "errcheck linter (unchecked errors, type assertions, blank)"
+    },
+    {
+      "label": "gosec linter (security checks, hardcoded creds, weak crypto, SQLi)",
+      "file_type": "concept",
+      "source_file": ".golangci.yml",
+      "source_location": "line 11",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "golangci_yml_gosec",
+      "community": 0,
+      "norm_label": "gosec linter (security checks, hardcoded creds, weak crypto, sqli)"
+    },
+    {
+      "label": "gofumpt linter (strict formatting, superset of gofmt)",
+      "file_type": "concept",
+      "source_file": ".golangci.yml",
+      "source_location": "line 14",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "golangci_yml_gofumpt",
+      "community": 0,
+      "norm_label": "gofumpt linter (strict formatting, superset of gofmt)"
+    },
+    {
+      "label": "CLAUDE.md project configuration (team shared)",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_md_project_config",
+      "community": 0,
+      "norm_label": "claude.md project configuration (team shared)"
+    },
+    {
+      "label": "README: claude-baseline-go scaffold overview",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_scaffold_overview",
+      "community": 2,
+      "norm_label": "readme: claude-baseline-go scaffold overview"
+    },
+    {
+      "label": "Skill distribution via GitHub Packages (npm versioned packages)",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": "line 173",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_skill_distribution",
+      "community": 2,
+      "norm_label": "skill distribution via github packages (npm versioned packages)"
+    },
+    {
+      "label": "Minimal Fork Path (Stage 1: no DB, Stage 2: persistence, Stage 3: scale)",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": "line 115",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_fork_stages",
+      "community": 2,
+      "norm_label": "minimal fork path (stage 1: no db, stage 2: persistence, stage 3: scale)"
+    },
+    {
+      "label": "Graphify team guide",
+      "file_type": "document",
+      "source_file": "docs/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_graphify_graphify_guide",
+      "community": 10,
+      "norm_label": "graphify team guide"
+    },
+    {
+      "label": "Knowledge Graph (persistent, queryable, tagged edges)",
+      "file_type": "concept",
+      "source_file": "docs/graphify.md",
+      "source_location": "line 3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_graphify_knowledge_graph",
+      "community": 10,
+      "norm_label": "knowledge graph (persistent, queryable, tagged edges)"
+    },
+    {
+      "label": "Graphify commands (query, path, explain, watch, wiki, svg)",
+      "file_type": "concept",
+      "source_file": "docs/graphify.md",
+      "source_location": "line 83",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_graphify_graph_commands",
+      "community": 10,
+      "norm_label": "graphify commands (query, path, explain, watch, wiki, svg)"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/hooks/post-tool-use.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "hooks_post_tool_use",
+      "target": "home_crinitib_workspace_personal_claude_scaffold_go_claude_hooks_post_tool_use_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/hooks/post-tool-use.sh",
+      "source_location": "17-19",
+      "weight": 1.0,
+      "source": "hooks_post_tool_use",
+      "target": "hooks_post_tool_use_auditlog"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/settings.json",
+      "source_location": "63-67",
+      "weight": 1.0,
+      "source": "settings_json",
+      "target": "hooks_post_tool_use"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/hooks/pre-bash.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "hooks_pre_bash",
+      "target": "home_crinitib_workspace_personal_claude_scaffold_go_claude_hooks_pre_bash_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/hooks/pre-bash.sh",
+      "source_location": "15-30",
+      "weight": 1.0,
+      "source": "hooks_pre_bash",
+      "target": "hooks_pre_bash_blockedpatterns"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/settings.json",
+      "source_location": "54-58",
+      "weight": 1.0,
+      "source": "settings_json",
+      "target": "hooks_pre_bash"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp",
+      "target": "mcp_mcp_server_datadog"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp",
+      "target": "mcp_mcp_server_github"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp",
+      "target": "mcp_mcp_server_postgres"
+    },
+    {
+      "relation": "requires_env",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp_mcp_server_github",
+      "target": "env_var_github_personal_access_token"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "source": "mcp_mcp_server_github",
+      "target": "mcp_command_npx"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "package",
+      "source": "mcp_mcp_server_github",
+      "target": "mcp_package_modelcontextprotocol_server_github"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "source": "mcp_mcp_server_datadog",
+      "target": "mcp_command_npx"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "source": "mcp_mcp_server_postgres",
+      "target": "mcp_command_npx"
+    },
+    {
+      "relation": "requires_env",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp_mcp_server_postgres",
+      "target": "env_var_postgres_connection_string"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "package",
+      "source": "mcp_mcp_server_postgres",
+      "target": "mcp_package_modelcontextprotocol_server_postgres"
+    },
+    {
+      "relation": "requires_env",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp_mcp_server_datadog",
+      "target": "env_var_dd_api_key"
+    },
+    {
+      "relation": "requires_env",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp_mcp_server_datadog",
+      "target": "env_var_dd_app_key"
+    },
+    {
+      "relation": "requires_env",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "mcp_mcp_server_datadog",
+      "target": "env_var_dd_site"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "package",
+      "source": "mcp_mcp_server_datadog",
+      "target": "mcp_package_datadog_mcp_server_datadog"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.go",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "main",
+      "target": "main_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_devdependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_private",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_scripts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_workspaces",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_team_claude_skills",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_setup_claude",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_copyskill",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_dryrun",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_fs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_installcavemanskills",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_installflatskills",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_resolvenodemodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "bin_install",
+      "target": "bin_install_targetdir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "bin_install_installflatskills",
+      "target": "bin_install_copyskill",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "bin_install_installcavemanskills",
+      "target": "bin_install_copyskill",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_bin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_description",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_keywords",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_license",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_publishconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_scripts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "claude_skills_package",
+      "target": "claude_skills_package_version",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "claude_skills_package_bin",
+      "target": "claude_skills_package_bin_claude_skills",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "claude_skills_package_dependencies",
+      "target": "claude_skills_package_dependencies_caveman_installer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "import",
+      "source": "claude_skills_package_dependencies_caveman_installer",
+      "target": "caveman_installer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "claude_skills_package_scripts",
+      "target": "claude_skills_package_scripts_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "claude_skills_package_publishconfig",
+      "target": "claude_skills_package_publishconfig_registry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/hooks/pre-bash.sh",
+      "source_location": "12-13",
+      "weight": 0.9,
+      "source": "hooks_pre_bash_blockedpatterns",
+      "target": "settings_json"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".claude/settings.local.json",
+      "source_location": null,
+      "weight": 0.95,
+      "source": "settings_local_json",
+      "target": "settings_json"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "27-36",
+      "weight": 1.0,
+      "source": "mcp_json",
+      "target": "mcp_datadog_server"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "11-18",
+      "weight": 1.0,
+      "source": "mcp_json",
+      "target": "mcp_github_server"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "19-26",
+      "weight": 1.0,
+      "source": "mcp_json",
+      "target": "mcp_postgres_server"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/commands/standup.md",
+      "source_location": "7",
+      "weight": 1.0,
+      "source": "commands_standup",
+      "target": "mcp_github_server"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/commands/db-schema.md",
+      "source_location": "5",
+      "weight": 1.0,
+      "source": "commands_db_schema",
+      "target": "mcp_postgres_server"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "weight": 0.65,
+      "source": "arch_observability_interfaces",
+      "target": "mcp_datadog_server"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "11-13",
+      "weight": 1.0,
+      "source": "package_json",
+      "target": "claude_skills_install_js"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "4-6",
+      "weight": 1.0,
+      "source": "package_json",
+      "target": "claude_skills_package_json"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "12-14",
+      "weight": 1.0,
+      "source": "claude_skills_package_json",
+      "target": "caveman_installer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/claude-skills/package.json",
+      "source_location": "5-7",
+      "weight": 1.0,
+      "source": "claude_skills_package_json",
+      "target": "claude_skills_install_js"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "4-5",
+      "weight": 1.0,
+      "source": "claude_skills_install_js",
+      "target": "caveman_installer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/claude-skills/bin/install.js",
+      "source_location": "17",
+      "weight": 1.0,
+      "source": "claude_skills_install_js",
+      "target": "claude_skills_target_dir"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.55,
+      "source_file": ".claude/commands/db-schema.md",
+      "source_location": null,
+      "weight": 0.55,
+      "source": "commands_db_schema",
+      "target": "rules_01_architecture"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": ".claude/commands/review.md",
+      "source_location": "12",
+      "weight": 0.75,
+      "source": "commands_review",
+      "target": "rules_01_architecture"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/commands/review.md",
+      "source_location": "12",
+      "weight": 1.0,
+      "source": "commands_review",
+      "target": "rules_02_conventions"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "rules_01_architecture",
+      "target": "arch_internal_only_rule"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "rules_01_architecture",
+      "target": "arch_layer_dependency_direction"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "rules_01_architecture",
+      "target": "arch_observability_interfaces"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".claude/rules/01-architecture.md",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "rules_01_architecture",
+      "target": "rules_02_conventions"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "rules_02_conventions",
+      "target": "conv_forbidden_patterns"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "rules_02_conventions",
+      "target": "conv_interface_in_consumer"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "rules_02_conventions",
+      "target": "conv_no_context_in_struct"
+    },
+    {
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "conv_interface_in_consumer",
+      "target": "go_codereview_wiki"
+    },
+    {
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/02-conventions.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "conv_no_context_in_struct",
+      "target": "pkg_go_dev_context"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 18",
+      "weight": 1.0,
+      "source": "claude_md_project_config",
+      "target": "rules_03_testing_testing_rules"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 13",
+      "weight": 1.0,
+      "source": "rules_03_testing_testing_rules",
+      "target": "rules_03_testing_coverage_expectations"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 65",
+      "weight": 1.0,
+      "source": "rules_03_testing_testing_rules",
+      "target": "rules_03_testing_llm_grading"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 44",
+      "weight": 1.0,
+      "source": "rules_03_testing_testing_rules",
+      "target": "rules_03_testing_must_not_mock"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 51",
+      "weight": 1.0,
+      "source": "rules_03_testing_testing_rules",
+      "target": "rules_03_testing_tdd_workflow"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 7",
+      "weight": 1.0,
+      "source": "rules_03_testing_testing_rules",
+      "target": "rules_03_testing_testcontainers"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 5",
+      "weight": 1.0,
+      "source": "rules_03_testing_testing_rules",
+      "target": "rules_03_testing_testify_framework"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/03-testing.md",
+      "source_location": "line 46",
+      "weight": 1.0,
+      "source": "rules_03_testing_must_not_mock",
+      "target": "rules_03_testing_testcontainers"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 6",
+      "weight": 0.95,
+      "source": "rules_03_testing_coverage_expectations",
+      "target": "rules_05_ci_gate_sequence"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 23",
+      "weight": 1.0,
+      "source": "rules_05_ci_ci_rules",
+      "target": "rules_03_testing_coverage_expectations"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 21",
+      "weight": 1.0,
+      "source": "claude_md_project_config",
+      "target": "rules_04_security_security_rules"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".golangci.yml",
+      "source_location": "line 11",
+      "weight": 0.85,
+      "source": "golangci_yml_gosec",
+      "target": "rules_04_security_security_rules"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 15",
+      "weight": 1.0,
+      "source": "rules_04_security_security_rules",
+      "target": "rules_04_security_auth_model"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 58",
+      "weight": 1.0,
+      "source": "rules_04_security_security_rules",
+      "target": "rules_04_security_dependency_security"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 5",
+      "weight": 1.0,
+      "source": "rules_04_security_security_rules",
+      "target": "rules_04_security_secrets_policy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 48",
+      "weight": 1.0,
+      "source": "rules_04_security_security_rules",
+      "target": "rules_04_security_vulnerability_classes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 63",
+      "weight": 1.0,
+      "source": "rules_05_ci_merge_requirements",
+      "target": "rules_04_security_security_rules"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/on-new-file.md",
+      "source_location": "line 19",
+      "weight": 1.0,
+      "source": "skills_on_new_file_skill",
+      "target": "rules_04_security_secrets_policy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/pre-commit-check.md",
+      "source_location": "line 17",
+      "weight": 1.0,
+      "source": "skills_pre_commit_check_skill",
+      "target": "rules_04_security_secrets_policy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": "line 19",
+      "weight": 1.0,
+      "source": "rules_04_security_auth_model",
+      "target": "rules_04_security_jwt_context_pattern"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".claude/rules/04-security.md",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "rules_04_security_vulnerability_classes",
+      "target": "golangci_yml_gosec"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 3",
+      "weight": 1.0,
+      "source": "rules_05_ci_ci_rules",
+      "target": "rules_05_ci_gate_sequence"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 37",
+      "weight": 1.0,
+      "source": "rules_05_ci_ci_rules",
+      "target": "rules_05_ci_linter_config"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 59",
+      "weight": 1.0,
+      "source": "rules_05_ci_ci_rules",
+      "target": "rules_05_ci_merge_requirements"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".claude/skills/pre-commit-check.md",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "skills_pre_commit_check_skill",
+      "target": "rules_05_ci_gate_sequence"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/rules/05-ci.md",
+      "source_location": "line 35",
+      "weight": 1.0,
+      "source": "rules_05_ci_linter_config",
+      "target": "golangci_yml_linter_config"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 163",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "skills_c4_architecture_skill"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/c4-architecture.md",
+      "source_location": "line 9",
+      "weight": 1.0,
+      "source": "skills_c4_architecture_skill",
+      "target": "skills_c4_architecture_c4_model"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/c4-architecture.md",
+      "source_location": "line 6",
+      "weight": 1.0,
+      "source": "skills_c4_architecture_skill",
+      "target": "skills_c4_architecture_mermaid_diagrams"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 162",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "skills_explain_error_skill"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 165",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "skills_frontend_design_skill"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/frontend-design.md",
+      "source_location": "line 15",
+      "weight": 1.0,
+      "source": "skills_frontend_design_skill",
+      "target": "skills_frontend_design_token_system"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/frontend-design.md",
+      "source_location": "line 79",
+      "weight": 1.0,
+      "source": "skills_frontend_design_skill",
+      "target": "skills_frontend_design_typography"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/frontend-design.md",
+      "source_location": "line 129",
+      "weight": 1.0,
+      "source": "skills_frontend_design_skill",
+      "target": "skills_frontend_design_wcag_accessibility"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 160",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "skills_on_new_file_skill"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 161",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "skills_pre_commit_check_skill"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 164",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "skills_solid_principles_skill"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 112",
+      "weight": 1.0,
+      "source": "skills_solid_principles_skill",
+      "target": "skills_solid_principles_dip"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 78",
+      "weight": 1.0,
+      "source": "skills_solid_principles_skill",
+      "target": "skills_solid_principles_isp"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 52",
+      "weight": 1.0,
+      "source": "skills_solid_principles_skill",
+      "target": "skills_solid_principles_lsp"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 26",
+      "weight": 1.0,
+      "source": "skills_solid_principles_skill",
+      "target": "skills_solid_principles_ocp"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 12",
+      "weight": 1.0,
+      "source": "skills_solid_principles_skill",
+      "target": "skills_solid_principles_srp"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/solid-principles.md",
+      "source_location": "line 137",
+      "weight": 1.0,
+      "source": "skills_solid_principles_dip",
+      "target": "skills_solid_principles_isp"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".golangci.yml",
+      "source_location": "line 7",
+      "weight": 1.0,
+      "source": "golangci_yml_linter_config",
+      "target": "golangci_yml_errcheck"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".golangci.yml",
+      "source_location": "line 14",
+      "weight": 1.0,
+      "source": "golangci_yml_linter_config",
+      "target": "golangci_yml_gofumpt"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".golangci.yml",
+      "source_location": "line 11",
+      "weight": 1.0,
+      "source": "golangci_yml_linter_config",
+      "target": "golangci_yml_gosec"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 24",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "golangci_yml_linter_config"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 56",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "claude_md_project_config"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 115",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "readme_fork_stages"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 173",
+      "weight": 1.0,
+      "source": "readme_scaffold_overview",
+      "target": "readme_skill_distribution"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/graphify.md",
+      "source_location": "line 83",
+      "weight": 1.0,
+      "source": "docs_graphify_graphify_guide",
+      "target": "docs_graphify_graph_commands"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/graphify.md",
+      "source_location": "line 3",
+      "weight": 1.0,
+      "source": "docs_graphify_graphify_guide",
+      "target": "docs_graphify_knowledge_graph"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "he_hook_enforcement_layer",
+      "label": "Two-layer command enforcement: settings.json deny list + pre-bash.sh hard safety net",
+      "nodes": [
+        "settings_json",
+        "hooks_pre_bash",
+        "hooks_pre_bash_blockedpatterns"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/hooks/pre-bash.sh"
+    },
+    {
+      "id": "he_mcp_servers",
+      "label": "MCP server trio: GitHub, Postgres, Datadog \u2014 all env-var credentials, no hardcoding",
+      "nodes": [
+        "mcp_json",
+        "mcp_github_server",
+        "mcp_postgres_server",
+        "mcp_datadog_server"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json"
+    },
+    {
+      "id": "he_skill_install_pipeline",
+      "label": "Skill install pipeline: package.json \u2192 install.js \u2192 team skills + caveman-installer \u2192 .claude/skills/",
+      "nodes": [
+        "package_json",
+        "claude_skills_install_js",
+        "caveman_installer",
+        "claude_skills_target_dir"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "packages/claude-skills/bin/install.js"
+    },
+    {
+      "id": "he_security_enforcement_triad",
+      "label": "Security enforcement triad: security rules, gosec linter, pre-commit check",
+      "nodes": [
+        "rules_04_security_security_rules",
+        "golangci_yml_gosec",
+        "skills_pre_commit_check_skill"
+      ],
+      "relation": "implement",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".claude/rules/04-security.md"
+    },
+    {
+      "id": "he_ci_quality_gates",
+      "label": "CI quality gates enforced by testing rules, CI rules, and linter config",
+      "nodes": [
+        "rules_03_testing_testing_rules",
+        "rules_05_ci_ci_rules",
+        "golangci_yml_linter_config"
+      ],
+      "relation": "implement",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".claude/rules/05-ci.md"
+    },
+    {
+      "id": "he_auto_skill_cluster",
+      "label": "Auto-triggering skills cluster",
+      "nodes": [
+        "skills_on_new_file_skill",
+        "skills_pre_commit_check_skill",
+        "skills_explain_error_skill",
+        "skills_c4_architecture_skill",
+        "skills_solid_principles_skill",
+        "skills_frontend_design_skill"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    }
+  ],
+  "built_at_commit": "8fc454470499059a8c746da5f94dcb08332de481"
+}

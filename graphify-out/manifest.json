@@ -1,0 +1,137 @@
+{
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/hooks/post-tool-use.sh": {
+    "mtime": 1781859703.5726948,
+    "ast_hash": "97bcb13e7e7204914855fdf926b83d95",
+    "semantic_hash": "97bcb13e7e7204914855fdf926b83d95"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/hooks/pre-bash.sh": {
+    "mtime": 1781859698.3386042,
+    "ast_hash": "10b4857f7f6800b14710a8aae6863fed",
+    "semantic_hash": "10b4857f7f6800b14710a8aae6863fed"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/settings.json": {
+    "mtime": 1782127402.7480764,
+    "ast_hash": "4b455b62bcd085ccfa24b72538d2c21a",
+    "semantic_hash": "4b455b62bcd085ccfa24b72538d2c21a"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/settings.local.json": {
+    "mtime": 1782123976.9535916,
+    "ast_hash": "ea7c11993f51291696e00bb1affd9396",
+    "semantic_hash": "ea7c11993f51291696e00bb1affd9396"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.mcp.json": {
+    "mtime": 1781773162.4053552,
+    "ast_hash": "8c7c5e2844676ea002cb9cf758547117",
+    "semantic_hash": "8c7c5e2844676ea002cb9cf758547117"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/main.go": {
+    "mtime": 1781773162.4053552,
+    "ast_hash": "0c47791274a7c874e21e9bf3ba181ff9",
+    "semantic_hash": "0c47791274a7c874e21e9bf3ba181ff9"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/package.json": {
+    "mtime": 1781792987.963649,
+    "ast_hash": "3d7563160f427dd32c2ab086cedf51c6",
+    "semantic_hash": "3d7563160f427dd32c2ab086cedf51c6"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/packages/claude-skills/bin/install.js": {
+    "mtime": 1781795053.484585,
+    "ast_hash": "6a1e437c94b5d9be8173d04ad84344bf",
+    "semantic_hash": "6a1e437c94b5d9be8173d04ad84344bf"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/packages/claude-skills/package.json": {
+    "mtime": 1781795028.8051014,
+    "ast_hash": "87c73b74cd52e053402bf39c01672035",
+    "semantic_hash": "87c73b74cd52e053402bf39c01672035"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/commands/db-schema.md": {
+    "mtime": 1781773162.4041402,
+    "ast_hash": "2ab8bc0b27bd5d18b0a012acfd0d5a50",
+    "semantic_hash": "2ab8bc0b27bd5d18b0a012acfd0d5a50"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/commands/review.md": {
+    "mtime": 1781773162.4043,
+    "ast_hash": "f358bf5f164bc1201b3082de4fd8ce1b",
+    "semantic_hash": "f358bf5f164bc1201b3082de4fd8ce1b"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/commands/standup.md": {
+    "mtime": 1781773162.4043,
+    "ast_hash": "e2ee420dc67b2135d403b961bc6d7501",
+    "semantic_hash": "e2ee420dc67b2135d403b961bc6d7501"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/rules/01-architecture.md": {
+    "mtime": 1782127440.5017757,
+    "ast_hash": "6d3dab95a74475ec967a982c70e21d38",
+    "semantic_hash": "6d3dab95a74475ec967a982c70e21d38"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/rules/02-conventions.md": {
+    "mtime": 1782127435.6596859,
+    "ast_hash": "cadeda2d66c395b9b5071aa548073938",
+    "semantic_hash": "cadeda2d66c395b9b5071aa548073938"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/rules/03-testing.md": {
+    "mtime": 1782124905.9483624,
+    "ast_hash": "1e701053154eba8f18026a0d2c3fa219",
+    "semantic_hash": "1e701053154eba8f18026a0d2c3fa219"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/rules/04-security.md": {
+    "mtime": 1782127423.9734695,
+    "ast_hash": "ac873302409c6911d04afa555cc45613",
+    "semantic_hash": "ac873302409c6911d04afa555cc45613"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/rules/05-ci.md": {
+    "mtime": 1782127375.187566,
+    "ast_hash": "a454d0497ebd5dd023cf388fb9ba271e",
+    "semantic_hash": "a454d0497ebd5dd023cf388fb9ba271e"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/skills/c4-architecture.md": {
+    "mtime": 1781855535.7758303,
+    "ast_hash": "5f26d777ed55f15f0e01d14970619d30",
+    "semantic_hash": "5f26d777ed55f15f0e01d14970619d30"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/skills/explain-error.md": {
+    "mtime": 1781773162.4048798,
+    "ast_hash": "fe01bbde1fb46d3a140e202c0a8eb3da",
+    "semantic_hash": "fe01bbde1fb46d3a140e202c0a8eb3da"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/skills/frontend-design.md": {
+    "mtime": 1781857512.1762435,
+    "ast_hash": "02d70e2a745146ddf01d474e0f6f8647",
+    "semantic_hash": "02d70e2a745146ddf01d474e0f6f8647"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/skills/on-new-file.md": {
+    "mtime": 1781773162.4053552,
+    "ast_hash": "bc511fab97dad90080f5c8de6fa4a296",
+    "semantic_hash": "bc511fab97dad90080f5c8de6fa4a296"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/skills/pre-commit-check.md": {
+    "mtime": 1781773162.4053552,
+    "ast_hash": "bd14153addaa6e9a6d45b40e90d82425",
+    "semantic_hash": "bd14153addaa6e9a6d45b40e90d82425"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.claude/skills/solid-principles.md": {
+    "mtime": 1781859699.3546216,
+    "ast_hash": "480e5172bf55749ce565ba84111b01cf",
+    "semantic_hash": "480e5172bf55749ce565ba84111b01cf"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/.golangci.yml": {
+    "mtime": 1782127394.2569191,
+    "ast_hash": "9ed5bb916dc799d9f964cb12cb6957ca",
+    "semantic_hash": "9ed5bb916dc799d9f964cb12cb6957ca"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/CLAUDE.md": {
+    "mtime": 1781859568.269353,
+    "ast_hash": "ab2d968def0a0ab82a45bc8588bfdf64",
+    "semantic_hash": "ab2d968def0a0ab82a45bc8588bfdf64"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/README.md": {
+    "mtime": 1781859788.461164,
+    "ast_hash": "ba8162d2d5e1f39eefbeb480e7398e1d",
+    "semantic_hash": "ba8162d2d5e1f39eefbeb480e7398e1d"
+  },
+  "/home/crinitib/workspace-personal/claude-scaffold-go/docs/graphify.md": {
+    "mtime": 1782132277.5527723,
+    "ast_hash": "b05fa3006aa7fe8e283ccaf11dead710",
+    "semantic_hash": "b05fa3006aa7fe8e283ccaf11dead710"
+  }
+}

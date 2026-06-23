@@ -1,0 +1,75 @@
+{
+  "_comment": [
+    "permissions.allow  — commands Claude runs WITHOUT prompting the user.",
+    "permissions.deny   — commands Claude can NEVER run, even if the user asks.",
+    "Deny takes precedence over allow.",
+    "Patterns use glob syntax: Bash(command:*) matches any args after the prefix.",
+    "pre-bash.sh hook adds a second enforcement layer for safety-critical patterns.",
+    "Edit this file to match your team's actual toolchain.",
+    "See: https://docs.anthropic.com/en/docs/claude-code/settings"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Bash(go vet:*)",
+      "Bash(go lint:*)",
+      "Bash(go fmt:*)",
+      "Bash(go mod:*)",
+      "Bash(golangci-lint:*)",
+      "Bash(gofumpt:*)",
+      "Bash(markitdown:*)",
+
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(echo:*)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(rm -rf:*)",
+      "Bash(DROP TABLE:*)",
+      "Bash(DELETE FROM:*)",
+      "Bash(*> .env*)",
+      "Bash(curl * | bash:*)",
+      "Bash(wget * | bash:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/pre-bash.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/post-tool-use.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
