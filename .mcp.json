@@ -8,6 +8,12 @@
     "See: https://docs.anthropic.com/en/docs/claude-code/mcp"
   ],
   "mcpServers": {
+    "slide-forge": {
+      "_comment": "Converts Markdown to standalone HTML slides. Runs locally via stdio (default). No env vars required.",
+      "command": "go",
+      "args": ["run", "."],
+      "cwd": "${workspaceFolder}"
+    },
     "github": {
       "_comment": "Gives Claude read/write access to GitHub: PRs, issues, branches, code search. Set GITHUB_TOKEN to a PAT with repo scope.",
       "command": "npx",
