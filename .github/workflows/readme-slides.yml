@@ -1,0 +1,98 @@
+name: Publish README slides
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+      - README-slides.html
+      - .github/workflows/readme-slides.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright
+        run: npx -y playwright@1.54.0 install --with-deps chromium
+
+      - name: Build preview site
+        run: |
+          set -euo pipefail
+          mkdir -p site
+          cp README-slides.html site/README-slides.html
+
+          cat > site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>slide-forge README slides</title>
+            <style>
+              body {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                max-width: 960px;
+                margin: 4rem auto;
+                padding: 0 1.5rem;
+                line-height: 1.5;
+                color: #1a1a2e;
+              }
+              img {
+                display: block;
+                width: 100%;
+                height: auto;
+                border: 1px solid #d0d7de;
+                border-radius: 12px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+              }
+            </style>
+          </head>
+          <body>
+            <h1>slide-forge README slides</h1>
+            <p><a href="./README-slides.html">Open the slide deck</a></p>
+            <img src="./readme-slides.png" alt="README slides preview">
+          </body>
+          </html>
+          EOF
+
+          npx -y playwright@1.54.0 screenshot \
+            --device="Desktop Chrome" \
+            --viewport-size=1600,1000 \
+            --wait-for-timeout=4000 \
+            "file://$GITHUB_WORKSPACE/README-slides.html" \
+            site/readme-slides.png
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

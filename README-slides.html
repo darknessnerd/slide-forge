@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Presentation</title>
 
-
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
         crossorigin="anonymous">
 
-
+  
   <style>
 :root {
   --bg: #f0f2f5;
@@ -41,7 +41,7 @@
       overflow: hidden;
     }
 
-
+     
     #app {
       display: flex;
       flex-direction: column;
@@ -54,7 +54,7 @@
       overflow: hidden;
     }
 
-
+     
     .slide {
       position: absolute;
       inset: 0;
@@ -68,8 +68,8 @@
       will-change: opacity, transform;
     }
 
-
-
+     
+     
     .t-enter        { transition: opacity 280ms ease; }
     .t-enter-start  { opacity: 0; }
     .t-enter-end    { opacity: 1; }
@@ -84,7 +84,7 @@
     .ts-leave-start  { transform: translateX(0);    opacity: 1; }
     .ts-leave-end    { transform: translateX(-60px);opacity: 0; }
 
-
+     
     .slide[data-type="title"] {
       text-align: center;
       background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
@@ -97,7 +97,7 @@
       margin-bottom: 1.5rem;
     }
 
-
+     
     .slide[data-type="section"] {
       background: var(--accent);
       color: #fff;
@@ -109,12 +109,12 @@
       color: #fff;
     }
 
-
+     
     .slide[data-type="summary"] .slide-title {
       color: var(--accent);
     }
 
-
+     
     .slide-title {
       font-size: clamp(1.4rem, 3vw, 2.2rem);
       font-weight: 600;
@@ -186,7 +186,7 @@
       margin-bottom: 0.75rem;
     }
 
-
+     
     #progress-bar-wrap {
       height: 4px;
       background: var(--progress-bg);
@@ -198,7 +198,7 @@
       transition: width 280ms ease;
     }
 
-
+     
     #nav {
       display: flex;
       align-items: center;
@@ -244,7 +244,7 @@
       margin-left: auto;
     }
 
-
+     
     #notes-panel {
       padding: 0.75rem 2rem;
       background: var(--notes-bg);
@@ -259,7 +259,7 @@
       color: var(--text);
     }
 
-
+     
     #slide-badge {
       position: absolute;
       bottom: 0.6rem;
@@ -269,7 +269,7 @@
       opacity: 0.5;
     }
 
-
+     
     #thumb-strip {
       display: flex;
       gap: 0.5rem;
@@ -301,7 +301,7 @@
       border-color: var(--accent);
     }
 
-
+     
     @media (max-width: 600px) {
       .slide { padding: 2rem 1.5rem; }
       #nav button { min-width: 60px; padding: 0.35rem 0.7rem; font-size: 0.8rem; }
@@ -315,17 +315,17 @@
      x-init="init()"
      @keydown.window="handleKey($event)">
 
-
-
+  
+  
   <div id="progress-bar-wrap">
     <div id="progress-bar" :style="`width:${progress}%`"></div>
   </div>
+  
 
-
-
+  
   <div id="slides-viewport">
     <template x-for="(slide, index) in slides" :key="index">
-
+      
       <section class="slide"
                :data-type="slide.type"
                x-show="current === index"
@@ -335,7 +335,7 @@
                x-transition:leave="ts-leave"
                x-transition:leave-start="ts-leave-start"
                x-transition:leave-end="ts-leave-end">
-
+      
         <h1 class="slide-title" x-text="slide.title" x-show="slide.title"></h1>
         <div class="slide-content" x-html="slide.content"></div>
         <span id="slide-badge" x-text="`${index + 1} / ${slides.length}`"></span>
@@ -343,14 +343,15 @@
     </template>
   </div>
 
-
+  
+  
   <div id="notes-panel" x-show="slides[current] && slides[current].notes">
     <strong>Notes:</strong>
     <span x-text="slides[current] ? slides[current].notes : ''"></span>
   </div>
+  
 
-
-
+  
   <div id="nav">
     <button @click="prev()" :disabled="current === 0">&#8592; Prev</button>
     <span id="slide-counter" x-text="`${current + 1} / ${slides.length}`"></span>
@@ -359,7 +360,7 @@
     <button @click="showThumbs = !showThumbs" title="Thumbnails">&#9783;</button>
   </div>
 
-
+  
   <div id="thumb-strip" x-show="showThumbs">
     <template x-for="(slide, index) in slides" :key="index">
       <div class="thumb"
@@ -380,7 +381,7 @@
     return {
       current: 0,
       showThumbs: false,
-      slides: [{"type":"title","title":"claude-baseline-go","content":"","notes":""},{"type":"content","title":"Team-shared Claude AI configuration for consistent, safe, context-aware behavior","content":"<hr>","notes":""},{"type":"content","title":"What This Repo Is","content":"<p>A scaffold template for wiring Claude Code into a Go project.</p>\n<p>Ships pre-configured:</p>\n<ul>\n<li><strong>Hooks</strong> — pre-bash, post-tool-use</li>\n<li><strong>Permissions</strong> — allow/deny lists</li>\n<li><strong>MCP connections</strong> — GitHub, Postgres, Datadog</li>\n<li><strong>Rules</strong> — architecture, conventions, testing, security</li>\n<li><strong>Commands</strong> — <code>/review</code>, <code>/standup</code>, <code>/db-schema</code></li>\n<li><strong>Skills</strong> — auto-triggered prompts</li>\n</ul>\n<blockquote>\n<p>Teams fork it and fill in the stubs.</p>\n</blockquote>\n<hr>","notes":""},{"type":"content","title":"Live vs Stub","content":"<table>\n<thead>\n<tr>\n<th>Path</th>\n<th>Status</th>\n<th>Notes</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>.claude/settings.json</code></td>\n<td>Live</td>\n<td>Permissions + hooks wired</td>\n</tr>\n<tr>\n<td><code>.claude/hooks/pre-bash.sh</code></td>\n<td>Live</td>\n<td>Blocks forbidden patterns via <code>jq</code></td>\n</tr>\n<tr>\n<td><code>.claude/hooks/post-tool-use.sh</code></td>\n<td>Live</td>\n<td>Audit log + failure alerts</td>\n</tr>\n<tr>\n<td><code>.claude/rules/*.md</code></td>\n<td>Partial stubs</td>\n<td>Scaffold defaults filled in</td>\n</tr>\n<tr>\n<td><code>.claude/commands/</code></td>\n<td>Live</td>\n<td><code>/review</code>, <code>/standup</code>, <code>/db-schema</code> functional</td>\n</tr>\n<tr>\n<td><code>.claude/skills/</code></td>\n<td>Live</td>\n<td>All auto-trigger skills functional</td>\n</tr>\n<tr>\n<td><code>.mcp.json</code></td>\n<td>Live config, disabled locally</td>\n<td>Requires env vars</td>\n</tr>\n<tr>\n<td><code>main.go</code></td>\n<td>Placeholder</td>\n<td>GoLand demo — not real entry point</td>\n</tr>\n</tbody>\n</table>\n<hr>","notes":""},{"type":"content","title":"How It Works","content":"<p>Claude reads configuration files at startup.</p>\n<table>\n<thead>\n<tr>\n<th>File / Folder</th>\n<th>Committed</th>\n<th>Purpose</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>CLAUDE.md</code></td>\n<td>Yes</td>\n<td>What Claude knows about the project</td>\n</tr>\n<tr>\n<td><code>CLAUDE.local.md</code></td>\n<td><strong>No</strong></td>\n<td>Personal overrides</td>\n</tr>\n<tr>\n<td><code>.mcp.json</code></td>\n<td>Yes</td>\n<td>External tool connections</td>\n</tr>\n<tr>\n<td><code>.claude/settings.json</code></td>\n<td>Yes</td>\n<td>Allow / deny list</td>\n</tr>\n<tr>\n<td><code>.claude/rules/</code></td>\n<td>Yes</td>\n<td>Detailed rule chapters</td>\n</tr>\n<tr>\n<td><code>.claude/commands/</code></td>\n<td>Yes</td>\n<td>Prompts you trigger</td>\n</tr>\n<tr>\n<td><code>.claude/skills/</code></td>\n<td>Yes</td>\n<td>Prompts Claude triggers automatically</td>\n</tr>\n<tr>\n<td><code>.claude/hooks/</code></td>\n<td>Yes</td>\n<td>Shell scripts on Claude events</td>\n</tr>\n</tbody>\n</table>\n<hr>","notes":""},{"type":"content","title":"Setup — 4 Steps","content":"<p><strong>1. Copy <code>CLAUDE.local.md</code></strong>\nAlready gitignored. Edit directly. Never commit.</p>\n<p><strong>2. Set env vars for MCP</strong></p>\n<pre><code class=\"language-bash\">export GITHUB_TOKEN=...\nexport DATABASE_URL=postgres://...\nexport DD_API_KEY=...\nexport DD_APP_KEY=...\nexport DD_SITE=datadoghq.eu\n</code></pre>\n<p><strong>3. Fill in the rules</strong>\n<code>.claude/rules/01-architecture.md</code> → system overview, data flow<br>\n<code>.claude/rules/02-conventions.md</code> → naming, layout, forbidden patterns<br>\n<code>.claude/rules/03-testing.md</code> → framework, coverage targets<br>\n<code>.claude/rules/04-security.md</code> → secrets, auth model, vuln classes</p>\n<p><strong>4. Fix the hooks</strong></p>\n<pre><code class=\"language-bash\">chmod +x .claude/hooks/*.sh\n</code></pre>\n<hr>","notes":""},{"type":"content","title":"Minimal Fork Path","content":"<p>Start small. Add layers only when a concrete feature requires them.</p>\n<pre><code>Stage 1 — no database yet\n  cmd/main.go\n  internal/\n    domain/    (value types + errors only)\n    service/   (business logic, defines its own interfaces)\n    handler/   (HTTP, imports service only)\n\nStage 2 — add persistence\n  internal/\n    repository/  (add when you have a real DB)\n\nStage 3 — scale\n  Split service/ into sub-packages by domain noun\n  Add internal/platform/ for cross-cutting concerns\n</code></pre>\n<blockquote>\n<p>Rule: never add a layer &quot;just in case.&quot;</p>\n</blockquote>\n<hr>","notes":""},{"type":"content","title":"Commands — You Trigger These","content":"<p>Type <code>/command-name</code> in Claude.</p>\n<table>\n<thead>\n<tr>\n<th>Command</th>\n<th>What it does</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>/review</code></td>\n<td>Review diff or file for bugs, conventions, security</td>\n</tr>\n<tr>\n<td><code>/standup</code></td>\n<td>Standup summary from yesterday's git log</td>\n</tr>\n<tr>\n<td><code>/db-schema</code></td>\n<td>Fetch DB schema via MCP postgres connection</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Add a command:</strong> create <code>.claude/commands/your-command.md</code><br>\nDescribe what Claude should do. Use <code>$ARGUMENTS</code> for user input.</p>\n<hr>","notes":""},{"type":"content","title":"Skills — Claude Triggers Automatically","content":"<table>\n<thead>\n<tr>\n<th>Skill</th>\n<th>Trigger</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>on-new-file</code></td>\n<td>Claude just created a source file</td>\n</tr>\n<tr>\n<td><code>pre-commit-check</code></td>\n<td>Claude is about to suggest <code>git commit</code></td>\n</tr>\n<tr>\n<td><code>explain-error</code></td>\n<td>A command exited non-zero</td>\n</tr>\n<tr>\n<td><code>c4-architecture</code></td>\n<td>Designing or documenting system architecture</td>\n</tr>\n<tr>\n<td><code>solid-principles</code></td>\n<td>Creating a package or designing an interface</td>\n</tr>\n<tr>\n<td><code>frontend-design</code></td>\n<td>Building or reviewing web UI</td>\n</tr>\n<tr>\n<td><code>caveman</code></td>\n<td>User types <code>/caveman</code></td>\n</tr>\n</tbody>\n</table>\n<p><strong>Add a skill:</strong> create <code>.claude/skills/your-skill.md</code><br>\nStart with a <code>**Trigger:**</code> line.</p>\n<hr>","notes":""},{"type":"content","title":"Versioned Skills via GitHub Packages","content":"<p>Skills distributed as versioned npm packages.</p>\n<pre><code>@team/caveman-skill  (GitHub Packages, versioned)\n        ↓\n@team/claude-skills  (GitHub Packages, versioned)\n        ↓\nconsumer repo  →  npm install &amp;&amp; npm run setup:claude\n</code></pre>\n<p><strong>One-time setup — <code>.npmrc</code>:</strong></p>\n<pre><code class=\"language-ini\">@team:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}\n</code></pre>\n<p><strong>Install:</strong></p>\n<pre><code class=\"language-bash\">npm install\nnpm run setup:claude   # copies skills → .claude/skills/\n</code></pre>\n<hr>","notes":""},{"type":"content","title":"Hooks — Shell Scripts on Events","content":"<table>\n<thead>\n<tr>\n<th>Hook</th>\n<th>Event</th>\n<th>What it does</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>pre-bash.sh</code></td>\n<td>Before every Bash call</td>\n<td>Blocks forbidden command patterns</td>\n</tr>\n<tr>\n<td><code>post-tool-use.sh</code></td>\n<td>After every tool call</td>\n<td>Audit log + failure alerts</td>\n</tr>\n</tbody>\n</table>\n<p>Payloads delivered as <strong>JSON via stdin</strong> — parse with <code>jq</code>.</p>\n<pre><code class=\"language-bash\">chmod +x .claude/hooks/*.sh\n</code></pre>\n<hr>","notes":""},{"type":"content","title":"Settings — Allow / Deny","content":"<p><code>.claude/settings.json</code> controls what Claude can run.</p>\n<ul>\n<li><strong>allow</strong> — commands Claude runs without prompting</li>\n<li><strong>deny</strong> — commands Claude can never run, even if asked</li>\n</ul>\n<p>Ships with safe defaults for a Go project.</p>\n<blockquote>\n<p>Edit to match your toolchain.</p>\n</blockquote>\n<hr>","notes":""},{"type":"content","title":"Known Issues — Fix Before Production","content":"<ol>\n<li><code>settings.json</code> — replace <code>Bash(go lint:*)</code> with <code>Bash(golangci-lint:*)</code></li>\n<li><code>main.go</code> — remove GoLand TIP comments; fix <code>fmt.Println</code> → <code>fmt.Printf</code></li>\n<li>Rules stubs — fill team-specific sections: system overview, auth model, coverage</li>\n</ol>\n<hr>","notes":""},{"type":"content","title":"Adding a New Team Member","content":"<ol>\n<li>Clone repo</li>\n<li>Receive env var template out-of-band (never commit secrets)</li>\n<li>Edit <code>CLAUDE.local.md</code> with personal preferences</li>\n<li><code>chmod +x .claude/hooks/*.sh</code></li>\n<li>Check <code>settings.local.json</code> — remove disabled MCP servers you need</li>\n<li>Start Claude — configuration is automatic</li>\n</ol>","notes":""}],
+      slides: [{"type":"title","title":"slide-forge","content":"\u003cp\u003e\u003cimg src=\"https://img.shields.io/badge/Claude_Code-compatible-6B48FF?logo=anthropic\u0026amp;logoColor=white\" alt=\"Claude Code\"\u003e\n\u003cimg src=\"https://img.shields.io/badge/MCP-slide--forge-0078D4?logo=amazonwebservices\u0026amp;logoColor=white\" alt=\"MCP\"\u003e\n\u003cimg src=\"https://img.shields.io/badge/Go-1.26-00ADD8?logo=go\u0026amp;logoColor=white\" alt=\"Go\"\u003e\n\u003cimg src=\"https://img.shields.io/badge/maintained-yes-brightgreen\" alt=\"Maintained\"\u003e\u003c/p\u003e\n\u003cp\u003eMCP server that converts Markdown into standalone HTML slide presentations. Single portable \u003ccode\u003e.html\u003c/code\u003e output — no server required to view.\u003c/p\u003e","notes":""},{"type":"section","title":"Preview","content":"\u003cp\u003e\u003ca href=\"https://darknessnerd.github.io/slide-forge/README-slides.html\"\u003e\u003cimg src=\"./docs/readme-slides.png\" alt=\"README slides preview\"\u003e\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eThe screenshot above mirrors the preview published by GitHub Actions, and the linked slide deck stays in sync with \u003ccode\u003eREADME-slides.html\u003c/code\u003e.\u003c/p\u003e\n\u003chr\u003e","notes":""},{"type":"content","title":"Local development setup","content":"","notes":""},{"type":"content","title":"1. Clone and verify it builds","content":"\u003cpre\u003e\u003ccode class=\"language-bash\"\u003egit clone https://github.com/darknessnerd/slide-forge.git\ncd slide-forge\ngo build ./...\ngo test -race ./...\n\u003c/code\u003e\u003c/pre\u003e","notes":""},{"type":"content","title":"2. Wire it into Claude Code","content":"\u003cp\u003eAdd to your project's \u003ccode\u003e.mcp.json\u003c/code\u003e (or \u003ccode\u003e~/.claude/mcp.json\u003c/code\u003e for global use):\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n  \u0026quot;mcpServers\u0026quot;: {\n    \u0026quot;slide-forge\u0026quot;: {\n      \u0026quot;command\u0026quot;: \u0026quot;go\u0026quot;,\n      \u0026quot;args\u0026quot;: [\u0026quot;run\u0026quot;, \u0026quot;./cmd\u0026quot;],\n      \u0026quot;cwd\u0026quot;: \u0026quot;/absolute/path/to/slide-forge\u0026quot;\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eClaude Code spawns the process automatically on startup via stdio — no env vars needed.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003ePrereq:\u003c/strong\u003e Go 1.21+.\u003c/p\u003e","notes":""},{"type":"content","title":"3. Verify the tool is available","content":"\u003cp\u003eOpen Claude Code in any project and ask:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eList available MCP tools.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eYou should see \u003ccode\u003emd_to_html_slides\u003c/code\u003e in the list.\u003c/p\u003e","notes":""},{"type":"content","title":"4. Try it","content":"\u003cpre\u003e\u003ccode\u003eConvert README.md into slides using the slide-forge tool.\nUse corporate theme. Save to README-slides.html.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOpen the generated \u003ccode\u003e.html\u003c/code\u003e file in any browser — no server required.\u003c/p\u003e\n\u003chr\u003e","notes":""},{"type":"section","title":"Configuration","content":"\u003cp\u003eConfig is loaded from \u003ccode\u003econfig/config.yaml\u003c/code\u003e (or \u003ccode\u003eCONFIG_PATH\u003c/code\u003e env var). All values support \u003ccode\u003e${env:VAR=default}\u003c/code\u003e substitution.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-yaml\"\u003e# config/config.yaml\ntransport: ${env:MCP_TRANSPORT=stdio}\naddr:      ${env:ADDR=:8080}\nlog_level: ${env:LOG_LEVEL=info}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eVariable\u003c/th\u003e\n\u003cth\u003eDefault\u003c/th\u003e\n\u003cth\u003eDescription\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003eMCP_TRANSPORT\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003estdio\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003estdio\u003c/code\u003e for Claude Code local use, \u003ccode\u003ehttp\u003c/code\u003e for remote/public\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003eADDR\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003e:8080\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003eHTTP listen address (HTTP mode only)\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003eLOG_LEVEL\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003einfo\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003edebug\u003c/code\u003e, \u003ccode\u003einfo\u003c/code\u003e, \u003ccode\u003ewarn\u003c/code\u003e, \u003ccode\u003eerror\u003c/code\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003eCONFIG_PATH\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003e./config/config.yaml\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003ePath to config file\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003chr\u003e","notes":""},{"type":"content","title":"Running in HTTP mode","content":"","notes":""},{"type":"content","title":"1. Start the server","content":"\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eMCP_TRANSPORT=http ADDR=:8080 go run ./cmd\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eOr with a pre-built binary:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ego build -o slide-forge ./cmd\nMCP_TRANSPORT=http ADDR=:8080 ./slide-forge\n\u003c/code\u003e\u003c/pre\u003e","notes":""},{"type":"content","title":"2. Verify it's up","content":"\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ecurl http://localhost:8080/health\n# → {\u0026quot;status\u0026quot;:\u0026quot;ok\u0026quot;}\n\ncurl http://localhost:8080/ready\n# → {\u0026quot;status\u0026quot;:\u0026quot;ready\u0026quot;}\n\u003c/code\u003e\u003c/pre\u003e","notes":""},{"type":"content","title":"3. Call the tool directly (curl)","content":"\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ecurl -X POST http://localhost:8080/mcp/ \\\n  -H \u0026quot;Content-Type: application/json\u0026quot; \\\n  -d '{\n    \u0026quot;jsonrpc\u0026quot;: \u0026quot;2.0\u0026quot;,\n    \u0026quot;id\u0026quot;: 1,\n    \u0026quot;method\u0026quot;: \u0026quot;tools/call\u0026quot;,\n    \u0026quot;params\u0026quot;: {\n      \u0026quot;name\u0026quot;: \u0026quot;md_to_html_slides\u0026quot;,\n      \u0026quot;arguments\u0026quot;: {\n        \u0026quot;markdown\u0026quot;: \u0026quot;# Hello\\n\\n## Slide two\\n\\nBody text.\u0026quot;,\n        \u0026quot;theme\u0026quot;: \u0026quot;dark\u0026quot;,\n        \u0026quot;transition_style\u0026quot;: \u0026quot;slide\u0026quot;\n      }\n    }\n  }'\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eResponse contains the full standalone HTML in \u003ccode\u003eresult.content[0].text\u003c/code\u003e. Write it to a file and open in a browser.\u003c/p\u003e","notes":""},{"type":"content","title":"4. Connect Claude Code to a remote server","content":"\u003cp\u003eIn \u003ccode\u003e.mcp.json\u003c/code\u003e (or \u003ccode\u003e~/.claude/mcp.json\u003c/code\u003e):\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n  \u0026quot;mcpServers\u0026quot;: {\n    \u0026quot;slide-forge\u0026quot;: {\n      \u0026quot;type\u0026quot;: \u0026quot;http\u0026quot;,\n      \u0026quot;url\u0026quot;: \u0026quot;https://your-domain.com/mcp/\u0026quot;\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eThen use it the same way as local:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eConvert README.md into slides using the slide-forge tool. Use corporate theme.\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003eNote:\u003c/strong\u003e HTTP mode is not production-ready yet — see TODO section below.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003chr\u003e","notes":""},{"type":"content","title":"Tool: md_to_html_slides","content":"\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eParameter\u003c/th\u003e\n\u003cth\u003eType\u003c/th\u003e\n\u003cth\u003eRequired\u003c/th\u003e\n\u003cth\u003eDefault\u003c/th\u003e\n\u003cth\u003eDescription\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003emarkdown\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003estring\u003c/td\u003e\n\u003ctd\u003eYes\u003c/td\u003e\n\u003ctd\u003e—\u003c/td\u003e\n\u003ctd\u003eMarkdown to convert\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003etheme\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003estring\u003c/td\u003e\n\u003ctd\u003eNo\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003elight\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003elight\u003c/code\u003e, \u003ccode\u003edark\u003c/code\u003e, \u003ccode\u003eminimal\u003c/code\u003e, \u003ccode\u003ecorporate\u003c/code\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003etransition_style\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003estring\u003c/td\u003e\n\u003ctd\u003eNo\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003efade\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003efade\u003c/code\u003e, \u003ccode\u003eslide\u003c/code\u003e, \u003ccode\u003enone\u003c/code\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003eenable_keyboard_navigation\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003ebool\u003c/td\u003e\n\u003ctd\u003eNo\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003etrue\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003eArrow / Space key navigation\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003einclude_progress_bar\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003ebool\u003c/td\u003e\n\u003ctd\u003eNo\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003etrue\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003eProgress bar at top\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003ccode\u003einclude_speaker_notes\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003ebool\u003c/td\u003e\n\u003ctd\u003eNo\u003c/td\u003e\n\u003ctd\u003e\u003ccode\u003etrue\u003c/code\u003e\u003c/td\u003e\n\u003ctd\u003eSpeaker notes panel\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003eReturns full HTML as a string. Write it to a \u003ccode\u003e.html\u003c/code\u003e file and open in any browser.\u003c/p\u003e\n\u003chr\u003e","notes":""},{"type":"content","title":"Project layout","content":"\u003cpre\u003e\u003ccode\u003ecmd/main.go                  ← entry point; transport selection, health endpoints\nconfig/config.yaml           ← default config with ${env:VAR=default} placeholders\ninternal/\n  config/                    ← AppConfig struct + YAML loader\n  derr/                      ← DError: structured errors with Kind + Op + Msg\n  domain/slide.go            ← value types (Slide, Theme, RenderRequest, …)\n  service/parser.go          ← Markdown → []Slide\n  service/renderer.go        ← []Slide → HTML string\n  handler/mcp.go             ← MCP tool registration and request handling\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e","notes":""},{"type":"content","title":"Development commands","content":"\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# build\ngo build ./...\n\n# tests\ngo test ./...\n\n# tests with race detector (required before commit)\ngo test -race ./...\n\n# coverage report\ngo test -coverprofile=coverage.out ./... \u0026amp;\u0026amp; go tool cover -func=coverage.out\n\n# run in stdio mode (default — used by Claude Code)\ngo run ./cmd\n\n# run as HTTP server\nMCP_TRANSPORT=http go run ./cmd\n\n# run with debug logging\nLOG_LEVEL=debug go run ./cmd\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e","notes":""},{"type":"content","title":"TODO — before HTTP production deployment","content":"\u003cul\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"\u003e \u003cstrong\u003eAuth\u003c/strong\u003e — bearer token middleware in \u003ccode\u003einternal/handler/\u003c/code\u003e before \u003ccode\u003e/mcp/\u003c/code\u003e is exposed publicly\u003c/li\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"\u003e \u003cstrong\u003eTLS\u003c/strong\u003e — put behind reverse proxy (nginx/caddy) or add \u003ccode\u003eListenAndServeTLS\u003c/code\u003e; plain HTTP not acceptable for public endpoints\u003c/li\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"\u003e \u003cstrong\u003eBody size limit\u003c/strong\u003e — wrap MCP handler with \u003ccode\u003ehttp.MaxBytesReader\u003c/code\u003e to prevent oversized payloads\u003c/li\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"\u003e \u003cstrong\u003eRate limiting\u003c/strong\u003e — add per-IP rate limiter middleware to prevent abuse\u003c/li\u003e\n\u003cli\u003e\u003cinput disabled=\"\" type=\"checkbox\"\u003e \u003cstrong\u003eTest coverage\u003c/strong\u003e — currently 51.7%; CI floor is 80%; need tests for \u003ccode\u003einternal/config\u003c/code\u003e, \u003ccode\u003einternal/derr\u003c/code\u003e, HTTP handler paths\u003c/li\u003e\n\u003c/ul\u003e","notes":""}],
 
       get progress() {
         if (this.slides.length <= 1) return 100;
@@ -388,7 +389,7 @@
       },
 
       init() {
-
+        
       },
 
       next() {
@@ -404,14 +405,14 @@
       },
 
       handleKey(e) {
-
+        
         if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); this.next(); }
         if (e.key === 'ArrowLeft')                   { e.preventDefault(); this.prev(); }
         if (e.key === 'Home')                        { e.preventDefault(); this.goto(0); }
         if (e.key === 'End')                         { e.preventDefault(); this.goto(this.slides.length - 1); }
         if (e.key === 'f' || e.key === 'F')          { this.toggleFullscreen(); }
         if (e.key === 't' || e.key === 'T')          { this.showThumbs = !this.showThumbs; }
-
+        
       },
 
       toggleFullscreen() {
