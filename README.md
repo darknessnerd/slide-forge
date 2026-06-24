@@ -9,7 +9,7 @@ MCP server that converts Markdown into standalone HTML slide presentations. Sing
 
 ## Preview
 
-[<img src="./docs/readme-slides.![README slides preview](./docs/readme-slides.png)d.github.io/slide-forge/README-slides.html)
+[<img src="./docs/readme-slides.png" width="240">](https://darknessnerd.github.io/slide-forge/README-slides.html)
 
 The screenshot above mirrors the preview published by GitHub Actions, and the linked slide deck stays in sync with `README-slides.html`.
 
